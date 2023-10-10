@@ -1,13 +1,13 @@
 public class Review{
-    String MODULEID = "Review";
-    DocumentRequestForm form;
+    private String MODULEID = "Review";
+    private DocumentRequestForm form;
     /**
     * This method will compare the form ID to the information of the A# to check
     *if the form is correct. If the form is not correct then the form is edited.
     *
     * @return true if it was able to be corrected or correct, false if otherwise.
     **/
-    public boolean review(int formID){
+    public boolean reviewForm(int formID){
         
         return false;
     }
