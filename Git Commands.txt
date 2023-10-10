@@ -1,0 +1,18 @@
+File Path:
+cd '/c/Users/Somay/OneDrive - George Mason University - O365 Production/Year 4 - Fall 2023/CS 321/Git Guide'
+
+Making Git:
+git init  # Initiates an empty git repository
+
+Commiting Changes:
+- do edits tO comMiT
+$ git add .  # "." adds all files in rep, repl 
+             w/file name to only stage that file
+$ git status  # lists all mods to be committed
+$ git commit -m "commit message"  # commits
+$ git reset HEAD~1  # undo commit, idk if works
+$ git push -u origin master  # pushes to origin
+$ git diff    # shows non-staged files
+$ git checkout  # revert commit
+$ git checkout -- <filename>  # revert file
+$ git log     # view commit history
