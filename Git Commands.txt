@@ -6,8 +6,7 @@ git init  # Initiates an empty git repository
 
 Commiting Changes:
 - do edits tO comMiT
-$ git add .  # "." adds all files in rep, repl 
-             w/file name to only stage that file
+$ git add .  # "." adds all files in rep, repl w/file name to only stage that file
 $ git status  # lists all mods to be committed
 $ git commit -m "commit message"  # commits
 $ git reset HEAD~1  # undo commit, idk if works
