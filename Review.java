@@ -1,4 +1,4 @@
-class Review{
+public class Review{
     String MODULEID = "Review";
     DocumentRequestForm form;
     /**
