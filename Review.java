@@ -19,21 +19,21 @@ public class Review{
     protected DocumentRequestForm editData(String type, String change){    
         return null;
     }
-     /**
-     * This method changes the desired type to be the new updated data
-     * @param type
-     * @param form
-     * @return
-     */
-    protected DocumentRequestForm editData(String type, int change){    
-        return null;
-    }
+    //  /**
+    //  * This method changes the desired type to be the new updated data
+    //  * @param type
+    //  * @param form
+    //  * @return
+    //  */
+    // protected DocumentRequestForm editData(String type, int change){    
+    //     return null;na
+    // }
 
     /**
      * saves data to database. 
      * @return String the message from the database
      */
-    public String saveData(){
+    public String saveForm(){
         return null;
     }
 

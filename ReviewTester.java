@@ -17,6 +17,9 @@ public class ReviewTester{
          obj.editData("dob", "September");
 
         assertEquals("Incorrect change:", "September", obj.editData("dob", "September").getDob());
-
+        assertEquals("Incorrect change:", "Changed name", obj.editData("name", "Changed name").getName());
+        assertEquals("Incorrect change:", "111 woods", obj.editData("address", "113 woods").getAddress());
+        assertEquals("Incorrect change:", "Paint", obj.editData("doc", "Paint").getDocName());
+        assertEquals("Incorrect change:", "Approval", obj.editData("dob", "Approval").getStatus());
     }
 }
