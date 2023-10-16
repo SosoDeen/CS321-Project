@@ -8,7 +8,6 @@ public class Review{
     * @return true if it was able to be corrected or correct, false if otherwise.
     **/
     public boolean reviewForm(int formID){
-        
         return false;
     }
     /**
@@ -17,9 +16,19 @@ public class Review{
      * @param form
      * @return
      */
-    private DocumentRequestForm editData(String type, DocumentRequestForm form){    
+    protected DocumentRequestForm editData(String type, String change){    
         return null;
     }
+     /**
+     * This method changes the desired type to be the new updated data
+     * @param type
+     * @param form
+     * @return
+     */
+    protected DocumentRequestForm editData(String type, int change){    
+        return null;
+    }
+
     /**
      * saves data to database. 
      * @return String the message from the database

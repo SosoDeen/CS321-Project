@@ -37,14 +37,38 @@ public class DocumentRequestForm {
     public String getStatus(){
         return null;
     }
+
+    public void setName(){
+    }
+    public void setDob(){
+    }
+    public void setAddress(){
+    }
+    public void setANum(){
+    }
+    public void setFormID(){
+    }
+    public void setDocName(){
+    
+    }
+    public void setStatus(){
+       
+    }
     public DocumentRequestForm createForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
         return null;
         //return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
     }
     public DocumentRequestForm getForm(int formID){
-        return this; //FIXME ask database for form
+        return null; //FIXME ask database for form
     }
     public String validate(DocumentRequestForm form){
+        return null;
+    }
+    /**
+     * Save the current for to the database 
+     * @return
+     */
+    public String saveToDatabase(){
         return null;
     }
 }
