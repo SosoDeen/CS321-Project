@@ -16,9 +16,9 @@ public class DocumentRequestForm {
         this.status = status;
         // soso wuz here too
     }
-    public DocumentRequestForm createForm(String name, String dob, String address,int formID, String docName, String status){
+    public DocumentRequestForm createForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
          
-        return new DocumentRequestForm(name, dob, address, formID, docName, status);
+        return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
     }
     public DocumentRequestForm getForm(int formID){
         return this; //FIXME ask database for form
