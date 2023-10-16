@@ -16,10 +16,6 @@ public class Approver {
         return false;
     }
 
-    public boolean loadData(){
-        return false;
-    }
-
     public boolean acceptAndEmail(){
         return false;
     }
