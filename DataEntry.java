@@ -7,11 +7,16 @@ public class DataEntry {
     }
 
     /**
-     * 
-     * @param newdata
+     * Internal method for requesting 
+     * new data when given data is invalid
      * @return
      */
-    private boolean requestNewData(String newdata){
+    private boolean requestNewData(){
+        // highlight incorrect field on screen
         return true;
+    }
+
+    private String validateData(){
+        return "errorMessage";
     }
 }
