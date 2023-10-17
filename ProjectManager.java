@@ -6,4 +6,9 @@ public class ProjectManager {
     public int nextTask(String moduleID){
         return formIDQueue.poll();
     }
+
+    public String addTask(String sendeeModule, int formID){
+        formIDQueue.add(formID);
+        return "error Message";
+    }
 }
