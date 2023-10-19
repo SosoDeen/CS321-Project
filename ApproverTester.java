@@ -7,21 +7,22 @@ public class ApproverTester {
     @Test
     public void testDataTest(){
         DocumentRequestForm form1 = new DocumentRequestForm("John Doe", "May 5", 
-        "123 First St.", 102, "Book", "Approve");
+        "123 First St.", 102, 0, "Book", "Approve");
         Approver obj = new Approver();
-        assertTrue("Incorrect decision should be true", obj.dataTest() == true);
-        assertTrue("Incorrect decision should be false", obj.dataTest() == false);
+        
+        assertEquals(true, obj.dataTest());
+        assertEquals(false, obj.dataTest());
     }
     
     public void acceptTest(){
         Approver obj = new Approver();
-        assertTrue("Incorrect outcome should be true", obj.acceptAndEmail() == true);
-        assertTrue("Incorrect outcome should be false", obj.acceptAndEmail() == false);
+        
+        assertEquals(null, obj.acceptAndEmail());
     }
 
     public void rejectTest(){
         Approver obj = new Approver();
-        assertTrue("Incorrect outcome should be true", obj.rejectAndReturn() == true);
-        assertTrue("Incorrect outcome should be false", obj.rejectAndReturn() == false);
+       
+        assertEquals(null, obj.rejectAndReturn());
     }
 }

@@ -1,6 +1,5 @@
 public class Approver {
     String MODULEID = "Approver"; //needs to be constant
-    String askerID;
     DocumentRequestForm form;
 
     /** 
@@ -16,11 +15,14 @@ public class Approver {
         return false;
     }
 
-    public boolean acceptAndEmail(){
-        return false;
+    
+    //generate string, do not generate actual email
+    public String acceptAndEmail(){
+        return null;
     }
 
-    public boolean rejectAndReturn(){
-        return false;
+    //return documentrequestform to workflow with status set to review
+    public DocumentRequestForm rejectAndReturn(){
+        return null;
     }
 }
