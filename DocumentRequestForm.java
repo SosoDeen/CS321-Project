@@ -65,6 +65,9 @@ public class DocumentRequestForm {
     public static DocumentRequestForm getForm(int formID){
         return null; //FIXME ask database for form
     }
+    /**
+     * Validates that the database entries are complete.
+     */
     public static String validate(DocumentRequestForm form){
         return null;
     }
@@ -73,6 +76,13 @@ public class DocumentRequestForm {
      * @return
      */
     public String saveToDatabase(){
+        return null;
+    }
+    /**
+     * Will try to find the address and document in the database and then send a signal to
+     * ship the document to the address.
+     */
+    public String shipDocument(){
         return null;
     }
 }
