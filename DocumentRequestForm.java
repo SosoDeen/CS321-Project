@@ -25,40 +25,44 @@ public class DocumentRequestForm {
         return this.address;
     }
     public int getANum(){
-        return 0;
+        return this.aNum;
     }
     public int getFormID(){
-        return 0;
+        return this.formID;
     }
     public String getDocName(){
-        return null;
+        return this.docName;
     }
     public String getStatus(){
-        return null;
+        return this.status;
     }
 
     public void setName(String name){
+        this.name = name;
     }
     public void setDob(String dob){
+        this.dob = dob;
     }
     public void setAddress(String Address){
+        this.address = Address;
     }
     // public void setANum(int aNum){
     // }
     // public void setFormID(int formID){
     // }
     public void setDocName(String docName){
-    
+        this.docName = docName;
     }
     public void setStatus(String status){
+        this.status = status;
     }
 
     // I changed createForm, getForm, and Validate to static methods because it doesn't make much sense
     // for these methods to require an instance of DocumentRequestForm to be called
     // ie needing a DocumentRequestForm already created in order to call createForm  - William O'Brien
     public static DocumentRequestForm createForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
-        return null;
-        //return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
+        //return null;
+        return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
     }
     public static DocumentRequestForm getForm(int formID){
         return null; 
@@ -70,7 +74,7 @@ public class DocumentRequestForm {
         return null;
     }
     /**
-     * Save the current for to the database 
+     * Save the current form to the database 
      * @return
      */
     public String saveToDatabase(){
@@ -85,9 +89,11 @@ public class DocumentRequestForm {
     }
     /**
      * A string representation of the form
-     * @return String the string conatining the form information.
+     * @return String the string containing the form information.
      */
     public String toString(){
-        return null;
+        return "FormID: " + this.getFormID() + "\nStatus: " + this.getStatus() + "\nName: " + this.getName()
+        + "\nANumber: " + this.getANum() + "\nDOB: " + this.getDob() + "\nAddress: " + this.getAddress()
+        + "\nDocument: " + this.getDocName();
     }
 }
