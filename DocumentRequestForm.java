@@ -17,13 +17,13 @@ public class DocumentRequestForm {
         // soso wuz here too
     }
     public String getName(){
-        return null;
+        return this.name;
     }
     public String getDob(){
-        return null;
+        return this.dob;
     }
     public String getAddress(){
-        return null;
+        return this.address;
     }
     public int getANum(){
         return 0;
