@@ -5,7 +5,7 @@ public class DocumentRequestForm {
     int aNum;
     int formID;
     String docName;
-    String status;// hihi this is a soso edit
+    String status;
 
     public DocumentRequestForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
         this.name = name;
@@ -14,7 +14,6 @@ public class DocumentRequestForm {
         this.formID = formID;
         this.docName = docName;
         this.status = status;
-        // soso wuz here too
     }
     public String getName(){
         return this.name;

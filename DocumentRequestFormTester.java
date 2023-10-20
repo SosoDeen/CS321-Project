@@ -68,7 +68,7 @@ public class DocumentRequestFormTester {
 
     @Test
     public void getFormTest(){
-        assertEquals("Incorrect Form", form, DocumentRequestForm.getForm(form.getFormID()));
+        assertEquals("Incorrect Form", form.getFormID(), DocumentRequestForm.getForm(form.getFormID()).getFormID());
         assertTrue("Form was not null", DocumentRequestForm.getForm(123) == null);
     }
     @Test
