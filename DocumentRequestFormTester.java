@@ -50,4 +50,16 @@ public class DocumentRequestFormTester {
         form.setStatus();
         assertEquals("Incorrect Item/Value", "Review", form.getStatus());
     }
+
+    @Test
+    public void createFormTest(){
+        DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 
+        262, 543, "Diploma", "Entry");
+        
+    }
+
+    @Test
+    public void getFormTest(){
+        assertEquals("Incorrect Form", form, DocumentRequestForm.getForm(form.getFormID()));
+    }
 }

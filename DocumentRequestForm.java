@@ -54,14 +54,18 @@ public class DocumentRequestForm {
     public void setStatus(){
        
     }
-    public DocumentRequestForm createForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
+
+    // I changed createForm, getForm, and Validate to static methods because it doesn't make much sense
+    // for these methods to require an instance of DocumentRequestForm to be called
+    // ie needing a DocumentRequestForm already created in order to call createForm  - William O'Brien
+    public static DocumentRequestForm createForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
         return null;
         //return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
     }
-    public DocumentRequestForm getForm(int formID){
+    public static DocumentRequestForm getForm(int formID){
         return null; //FIXME ask database for form
     }
-    public String validate(DocumentRequestForm form){
+    public static String validate(DocumentRequestForm form){
         return null;
     }
     /**
