@@ -38,21 +38,20 @@ public class DocumentRequestForm {
         return null;
     }
 
-    public void setName(){
+    public void setName(String name){
     }
-    public void setDob(){
+    public void setDob(String dob){
     }
-    public void setAddress(){
+    public void setAddress(String Address){
     }
-    public void setANum(){
-    }
-    public void setFormID(){
-    }
-    public void setDocName(){
+    // public void setANum(int aNum){
+    // }
+    // public void setFormID(int formID){
+    // }
+    public void setDocName(String docName){
     
     }
-    public void setStatus(){
-       
+    public void setStatus(String status){
     }
 
     // I changed createForm, getForm, and Validate to static methods because it doesn't make much sense
@@ -63,7 +62,7 @@ public class DocumentRequestForm {
         //return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
     }
     public static DocumentRequestForm getForm(int formID){
-        return null; //FIXME ask database for form
+        return null; 
     }
     /**
      * Validates that the database entries are complete.
