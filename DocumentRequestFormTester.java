@@ -7,7 +7,7 @@ public class DocumentRequestFormTester {
 
     DocumentRequestForm form = new DocumentRequestForm("John Doe", "January 2", 
     "123 Test St.", 100, 200, "Book", "Test");
-
+    String expectedString = "FormID: 100 Status: Test\nName: John Doe\nANumber:200\nDOB: January 2\nAddress: 123 Test St.\nDocument: Book";
     @Test
     public void getSetNameTest(){
         assertEquals("Incorrect Item/Value, expected John Doe, but was " + form.getName(), "John Doe", form.getName());
@@ -54,6 +54,10 @@ public class DocumentRequestFormTester {
     }
 
     @Test
+    public void toStringTest(){
+        assertEquals("Incorrect string expeccted:\n" + expectedString+ "\nBut was:\n"+ form.toString(), expectedString, form.toString());
+    }
+    @Test
     public void createFormTest(){
         DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 
         262, 543, "Diploma", "Entry");
@@ -71,7 +75,10 @@ public class DocumentRequestFormTester {
     public void saveToDatabase(){
         Database obj = new Database();
         String result = obj.add(this);
-        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", obj.add(this));
+        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
+        assertTrue("Error was successful", obj.add(null) != "Success");
+        result = obj.add(new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review"));
+        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
 
     }
 }

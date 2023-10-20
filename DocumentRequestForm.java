@@ -84,4 +84,11 @@ public class DocumentRequestForm {
     public String shipDocument(){
         return null;
     }
+    /**
+     * A string representation of the form
+     * @return String the string conatining the form information.
+     */
+    public String toString(){
+        return null;
+    }
 }
