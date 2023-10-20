@@ -55,7 +55,7 @@ public class DocumentRequestFormTester {
     public void createFormTest(){
         DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 
         262, 543, "Diploma", "Entry");
-        
+        assertEquals("Incorrect Form", form2, DocumentRequestForm.getForm(262));
     }
 
     @Test
