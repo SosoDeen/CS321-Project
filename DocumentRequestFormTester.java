@@ -67,14 +67,14 @@ public class DocumentRequestFormTester {
         assertEquals("Incorrect Form", form.getFormID(), DocumentRequestForm.getForm(form.getFormID()).getFormID());
         assertTrue("Form was not null", DocumentRequestForm.getForm(123) == null);
     }
-//    @Test
-//    public void saveToDatabase(){
-//        Database obj = new Database();
-//        String result = obj.add(this);
-//        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-//        assertTrue("Error was successful", obj.add(null) != "Success");
-//        result = obj.add(new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review"));
-//        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-//
-//    }
+    @Test
+    public void saveToDatabase(){
+        Database obj = new Database();
+        String result = obj.add(this);
+        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
+        assertTrue("Error was successful", obj.add(null) != "Success");
+        result = obj.add(new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review"));
+        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
+
+    }
 }
