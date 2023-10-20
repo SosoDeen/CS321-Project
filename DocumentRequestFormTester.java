@@ -62,4 +62,8 @@ public class DocumentRequestFormTester {
     public void getFormTest(){
         assertEquals("Incorrect Form", form, DocumentRequestForm.getForm(form.getFormID()));
     }
+    @Test
+    public void saveToDatabase(){
+       // assertEquals("Error unsucessful", )
+    }
 }

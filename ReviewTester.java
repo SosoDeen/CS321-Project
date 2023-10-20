@@ -14,7 +14,8 @@ public class ReviewTester{
     public void editTest(){
         DocumentRequestForm form1 = new DocumentRequestForm("Test 1", "October", "123 tester", 102, 10203, "Book", "Review");
         Review obj = new Review();
-         obj.editData("dob", "September");
+        obj.reviewForm(form1.getFormID());
+        obj.editData("dob", "September");
 
         assertEquals("Incorrect change:", "September", obj.editData("dob", "September").getDob());
         assertEquals("Incorrect change:", "Changed name", obj.editData("name", "Changed name").getName());

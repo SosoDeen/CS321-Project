@@ -7,7 +7,7 @@ public class DocumentRequestForm {
     String docName;
     String status;// hihi this is a soso edit
 
-    DocumentRequestForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
+    public DocumentRequestForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
         this.name = name;
         this.dob = dob;
         this.address = address;
