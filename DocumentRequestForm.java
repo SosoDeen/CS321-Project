@@ -1,11 +1,11 @@
 public class DocumentRequestForm {
-    String name;
-    String dob;
-    String address;
-    int aNum;
-    int formID;
-    String docName;
-    String status;
+    private String name;
+    private String dob;
+    private String address;
+    private int aNum;
+    private int formID;
+    private String docName;
+    private String status;
 
     public DocumentRequestForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
         this.name = name;
@@ -74,12 +74,12 @@ public class DocumentRequestForm {
     public static DocumentRequestForm getForm(int formID){
         return null; 
     }
-    /**
-     * Validates that the database entries are complete.
-     */
-    public static String validate(DocumentRequestForm form){
-        return null;
-    }
+    // /**
+    //  * Validates that the database entries are complete.
+    //  */
+    // public static String validate(DocumentRequestForm form){
+    //     return null;
+    // }
     /**
      * Save the current form to the database 
      * @return
