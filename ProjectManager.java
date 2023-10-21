@@ -1,8 +1,8 @@
 import java.util.Queue;
 
 public class ProjectManager {
-    public Queue<Integer> formIDQueue;
-    int size;
+    private Queue<Integer> formIDQueue;
+    private int size;
     /**
      * Constructor for Project manager
      */
