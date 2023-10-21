@@ -80,11 +80,13 @@ public class DocumentRequestFormTester {
 
     @Test
     public void shipDocumentTest(){
-        Database obj = new Database();
-        String result = obj.get(this);
+        //Database obj = new Database();
+        String result = form.shipDocument();
         assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-        assertTrue("Error was successful", obj.get(null) != "Success");
-        result = obj.get(new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review"));
+        form = new DocumentRequestForm("John Doe", "January 2", "wrong address", 100, 200, "Book", "Test");
+        result = form.shipDocument();
+        assertTrue("Error was successful", result != "Success");
+        form = new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review");
         assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
     }
 }
