@@ -31,4 +31,11 @@ public class ProjectManagerTester {
         formID = manager.nextTask("Approver");
         assertTrue("A task was selected, expected 101, but was " + formID, formID == 101);
     }
+
+    @Test
+    public void sendEmailTest(){
+        Approver appr = new Approver();
+        String text = appr.acceptAndEmail();
+        assertEquals("Email was not properly created. Expected Email, but was " + manager.sendEmail(text), "Email", manager.sendEmail(text));
+    }
 }

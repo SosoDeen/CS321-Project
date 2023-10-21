@@ -28,4 +28,8 @@ public class ProjectManager {
         //formIDQueue.add(formID);
         return "error Message";
     }
+
+    public String sendEmail(String text){
+        return null;
+    }
 }
