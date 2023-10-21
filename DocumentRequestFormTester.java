@@ -58,7 +58,7 @@ public class DocumentRequestFormTester {
         DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 
         262, 543, "Diploma", "Entry");
         assertEquals("Incorrect Form", form2, DocumentRequestForm.getForm(262));
-        //assertTrue("Form was not null", )
+        assertTrue("Form was not null", DocumentRequestForm.getForm(3) == null);
         //TODO Add how you will test the data entry
     }
 
