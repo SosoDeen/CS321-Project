@@ -23,7 +23,10 @@ public class Screen extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         DocumentRequestForm form = new DocumentRequestForm("Starling Devine", "October 27 2002", "123 tester", 102, 10203, "Book", "Entry");
-        displayScreenForDataEntry(form);
+        
+        //displayScreen(form);
+        //displayScreenForDataEntry();
+        //displayScreenForReview(form);
         /**stage.setTitle("Form Document");
 
         //Group root = new Group();
@@ -66,9 +69,8 @@ public class Screen extends Application{
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-
         scene = new Scene(grid, 950, 950);
-        
+       
         Text formID = new Text("FormID: " + form.getFormID());
         formID.setFont(Font.font(20));
         grid.add(formID, 0, 1);
@@ -101,8 +103,15 @@ public class Screen extends Application{
         stage.show();
     }
     public String[] displayScreenForDataEntry(){
+        stage = new Stage();
+        stage.setTitle("Form Document");
+        grid = new GridPane();
+        grid.setAlignment(Pos.TOP_LEFT);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        scene = new Scene(grid, 950, 950);
         String[] newInfo = new String[2];
-
         Label nameLabel = new Label("Name: ");
         grid.add(nameLabel, 0, 1);
         
@@ -145,6 +154,10 @@ public class Screen extends Application{
         hbBtn.setAlignment(Pos.BOTTOM_LEFT);
         hbBtn.getChildren().add(approve);
         grid.add(hbApp, 1, 11);
+        
+        
+        stage.setScene(scene);
+        stage.show();
 
         return newInfo;
     }
