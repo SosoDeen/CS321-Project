@@ -194,5 +194,23 @@ public class Screen extends Application{
         return newInfo;
 
     }
+
+    public String displayScreenForApproval(DocumentRequestForm form){
+        displayScreen(form);
+
+        Button approve = new Button("Approve");
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.getChildren().add(approve);
+        grid.add(hbBtn, 0, 32);
+
+        Button reject = new Button("Reject");
+        HBox hbApp = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.getChildren().add(reject);
+        grid.add(hbApp, 1, 32);
+
+        return null;
+    }
     
 }
