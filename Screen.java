@@ -100,34 +100,51 @@ public class Screen extends Application{
         stage.setScene(scene);
         stage.show();
     }
-    public String[] displayScreenForDataEntry(DocumentRequestForm form){
+    public String[] displayScreenForDataEntry(){
         String[] newInfo = new String[2];
 
-        displayScreen(form);
-        Label change = new Label("Field: ");
-        grid.add(change, 0, 30);
+        Label nameLabel = new Label("Name: ");
+        grid.add(nameLabel, 0, 1);
         
-        TextField changeField = new TextField();
-        grid.add(changeField, 1, 30);
+        TextField nameField = new TextField();
+        grid.add(nameField, 1, 1);
         
-        Label infoLabel = new Label("Input: ");
-        grid.add(infoLabel, 0, 31);
+        Label aNumLabel = new Label("ANumber: ");
+        grid.add(aNumLabel, 0, 3);
         
-        TextField infoField = new TextField();
-        grid.add(infoField, 1, 31);
+        TextField aNumField = new TextField();
+        grid.add(aNumField, 1, 3);
+
+        Label DOBLabel = new Label("DOB: ");
+        grid.add(DOBLabel, 0, 5);
+        
+        TextField DOBField = new TextField();
+        grid.add(DOBField, 1, 5);
+        
+        Label addressLabel = new Label("Address: ");
+        grid.add(addressLabel, 0, 7);
+        
+        TextField addressField = new TextField();
+        grid.add(addressField, 1, 7);
+
+        Label docTypeLabel = new Label("Document: ");
+        grid.add(docTypeLabel, 0, 9);
+        
+        TextField docTypeField = new TextField();
+        grid.add(docTypeField, 1, 9);
         
         
         Button update = new Button("Submit");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_LEFT);
         hbBtn.getChildren().add(update);
-        grid.add(hbBtn, 0, 32);
+        grid.add(hbBtn, 0, 11);
 
         Button approve = new Button("Cancel");
         HBox hbApp = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_LEFT);
         hbBtn.getChildren().add(approve);
-        grid.add(hbApp, 1, 32);
+        grid.add(hbApp, 1, 11);
 
         return newInfo;
     }
