@@ -27,6 +27,7 @@ public class Screen extends Application{
         //displayScreen(form);
         //displayScreenForDataEntry();
         //displayScreenForReview(form);
+       
         /**stage.setTitle("Form Document");
 
         //Group root = new Group();
