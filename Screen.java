@@ -89,11 +89,11 @@ public class Screen extends Application{
         docName.setFont(Font.font(20));
         grid.add(docName, 1, 7);
 
-        Button submit = new Button("Submit");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(submit);
-        grid.add(hbBtn, 50, 50);
+        // Button submit = new Button("Submit");
+        // HBox hbBtn = new HBox(10);
+        // hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        // hbBtn.getChildren().add(submit);
+        // grid.add(hbBtn, 50, 50);
         //scene.add(hb);
         stage.setScene(scene);
         stage.show();
