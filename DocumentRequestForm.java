@@ -12,56 +12,50 @@ public class DocumentRequestForm {
         this.dob = dob;
         this.address = address;
         this.formID = formID;
+        this.aNum = aNum;
         this.docName = docName;
         this.status = status;
     }
     public String getName(){
-        //return this.name;
-        return null;
+        return this.name;
     }
     public String getDob(){
-        //return this.dob;
-        return null;
+        return this.dob;
     }
     public String getAddress(){
-        //return this.address;
-        return null;
+        return this.address;
     }
     public int getANum(){
-        //return this.aNum;
-        return 0;
+        return this.aNum;
     }
     public int getFormID(){
-        //return this.formID;
-        return 0;
+        return this.formID;
     }
     public String getDocName(){
-        //return this.docName;
-        return null;
+        return this.docName;
     }
     public String getStatus(){
-        //return this.status;
-        return null;
+        return this.status;
     }
 
     public void setName(String name){
-        //this.name = name;
+        this.name = name;
     }
     public void setDob(String dob){
-        //this.dob = dob;
+        this.dob = dob;
     }
     public void setAddress(String Address){
-        //this.address = Address;
+        this.address = Address;
     }
     // public void setANum(int aNum){
     // }
     // public void setFormID(int formID){
     // }
     public void setDocName(String docName){
-        //this.docName = docName;
+        this.docName = docName;
     }
     public void setStatus(String status){
-        //this.status = status;
+        this.status = status;
     }
 
     // I changed createForm, getForm, and Validate to static methods because it doesn't make much sense
