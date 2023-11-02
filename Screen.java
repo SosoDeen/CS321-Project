@@ -23,7 +23,7 @@ public class Screen extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         DocumentRequestForm form = new DocumentRequestForm("Starling Devine", "October 27 2002", "123 tester", 102, 10203, "Book", "Entry");
-        displayScreenForReview(form);
+        displayScreenForDataEntry(form);
         /**stage.setTitle("Form Document");
 
         //Group root = new Group();
@@ -99,6 +99,37 @@ public class Screen extends Application{
         //scene.add(hb);
         stage.setScene(scene);
         stage.show();
+    }
+    public String[] displayScreenForDataEntry(DocumentRequestForm form){
+        String[] newInfo = new String[2];
+
+        displayScreen(form);
+        Label change = new Label("Field: ");
+        grid.add(change, 0, 30);
+        
+        TextField changeField = new TextField();
+        grid.add(changeField, 1, 30);
+        
+        Label infoLabel = new Label("Input: ");
+        grid.add(infoLabel, 0, 31);
+        
+        TextField infoField = new TextField();
+        grid.add(infoField, 1, 31);
+        
+        
+        Button update = new Button("Submit");
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.getChildren().add(update);
+        grid.add(hbBtn, 0, 32);
+
+        Button approve = new Button("Cancel");
+        HBox hbApp = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.getChildren().add(approve);
+        grid.add(hbApp, 1, 32);
+
+        return newInfo;
     }
     public String[] displayScreenForReview(DocumentRequestForm form){
         String[] newInfo = new String[2];
