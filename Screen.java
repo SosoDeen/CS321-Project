@@ -14,14 +14,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Screen extends Application{
+    private Stage stage;
+    private GridPane grid;
+    private Scene scene;
     public static void main(String[] args){
         launch(args);
     }
     @Override
     public void start(Stage stage) throws Exception {
         DocumentRequestForm form = new DocumentRequestForm("Starling Devine", "October 27 2002", "123 tester", 102, 10203, "Book", "Entry");
-        displayScreen(form);
-        return;
+        displayScreenForReview(form);
         /**stage.setTitle("Form Document");
 
         //Group root = new Group();
@@ -57,37 +59,37 @@ public class Screen extends Application{
         **/
     }
     public void displayScreen(DocumentRequestForm form){
-        Stage stage = new Stage();
+        stage = new Stage();
         stage.setTitle("Form Document");
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.setAlignment(Pos.TOP_LEFT);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Scene scene = new Scene(grid, 950, 950);
+        scene = new Scene(grid, 950, 950);
         
         Text formID = new Text("FormID: " + form.getFormID());
         formID.setFont(Font.font(20));
-        grid.add(formID, 1, 1);
+        grid.add(formID, 0, 1);
         Text status = new Text("Status: " + form.getStatus());
         status.setFont(Font.font(20));
-        grid.add(status, 1, 2);
+        grid.add(status, 0, 2);
         Text name = new Text("Name: " + form.getName());
         name.setFont(Font.font(20));
-        grid.add(name, 1, 3);
+        grid.add(name, 0, 3);
         Text anum = new Text("Anumber: " + form.getANum());
         anum.setFont(Font.font(20));
-        grid.add(anum, 1, 4);
+        grid.add(anum, 0, 4);
         Text dob = new Text("DOB: " + form.getDob());
         dob.setFont(Font.font(20));
-        grid.add(dob, 1, 5);
+        grid.add(dob, 0, 5);
         Text address = new Text("Address: " + form.getAddress());
         address.setFont(Font.font(20));
-        grid.add(address, 1, 6);
+        grid.add(address, 0, 6);
         Text docName = new Text("Document: " + form.getDocName());
         docName.setFont(Font.font(20));
-        grid.add(docName, 1, 7);
+        grid.add(docName, 0, 7);
 
         // Button submit = new Button("Submit");
         // HBox hbBtn = new HBox(10);
@@ -97,6 +99,38 @@ public class Screen extends Application{
         //scene.add(hb);
         stage.setScene(scene);
         stage.show();
+    }
+    public String[] displayScreenForReview(DocumentRequestForm form){
+        String[] newInfo = new String[2];
+
+        displayScreen(form);
+        Label change = new Label("Category: ");
+        grid.add(change, 0, 30);
+        
+        TextField changeField = new TextField();
+        grid.add(changeField, 1, 30);
+        
+        Label infoLabel = new Label("Correction: ");
+        grid.add(infoLabel, 0, 31);
+        
+        TextField infoField = new TextField();
+        grid.add(infoField, 1, 31);
+        
+        
+        Button update = new Button("Update");
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.getChildren().add(update);
+        grid.add(hbBtn, 0, 32);
+
+        Button approve = new Button("Approve");
+        HBox hbApp = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.getChildren().add(approve);
+        grid.add(hbApp, 1, 32);
+
+        return newInfo;
+
     }
     
 }
