@@ -27,6 +27,7 @@ public class Screen extends Application{
         //displayScreen(form);
         //displayScreenForDataEntry();
         //displayScreenForReview(form);
+        displayScreenForApproval(form);
        
         /**stage.setTitle("Form Document");
 
