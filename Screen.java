@@ -33,11 +33,26 @@ public class Screen extends JFrame implements ActionListener{
     private JButton iterT_F;
     /** Button for skip sus reviews and words iteration */
     private JButton iterT_T;
+    /** Button for approval to approve item */
+    private JButton approveButton;
+    /** Button for approval to reject item */
+    private JButton rejectButton;
+    /** Button to load in next form */
+    private JButton nextForm;
     /** Label to display iteration */
     private JTextArea iterPrint;
     /** Allows to scroll in iteration display */
     private JScrollPane scrollPane;
     private JFrame dataEntry, review, approve;
+
+     /** displays the information of the form request */
+     private JLabel name;
+     private JLabel dob;
+     private JLabel address;
+     private JLabel formID;
+     private JLabel aNum;
+     private JLabel docName;
+     private JLabel status;
     
 
     /** Constructor */
@@ -296,6 +311,43 @@ public class Screen extends JFrame implements ActionListener{
         dataEntry.setVisible(true);
     }
 
+    public void approverScreen(){
+
+        GridBagConstraints layoutConst = null;
+        approve.setLayout(new GridBagLayout());
+
+        label = new JLabel("Approval Step");
+
+        approveButton = new JButton("Approve Form");
+        approveButton.addActionListener(this);
+
+        rejectButton = new JButton("Reject Form");
+        rejectButton.addActionListener(this);
+
+        nextForm = new JButton("Load Next Form");
+        nextForm.addActionListener(this);
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 1);
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 3;
+        approve.add(nextForm, layoutConst);
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 1);
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 3;
+        approve.add(approveButton, layoutConst);
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 1);
+        layoutConst.gridx = 2;
+        layoutConst.gridy = 3;
+        approve.add(rejectButton, layoutConst);
+
+
+    }
+
     /**
      * Function to implement ActionListener
      * @param event when the user hits enter
@@ -421,6 +473,15 @@ public class Screen extends JFrame implements ActionListener{
                 
             } catch(Exception e){System.out.println();e.printStackTrace();}
             */
+        }
+        else if(sourceEvent == approveButton){
+
+        }
+        else if(sourceEvent == rejectButton){
+
+        }
+        else if(sourceEvent == nextForm){
+            
         }
     }
     
