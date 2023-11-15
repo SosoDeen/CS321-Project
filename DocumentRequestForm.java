@@ -62,8 +62,8 @@ public class DocumentRequestForm {
     // for these methods to require an instance of DocumentRequestForm to be called
     // ie needing a DocumentRequestForm already created in order to call createForm  - William O'Brien
     public static DocumentRequestForm createForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
-        return null;
-        //return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
+        //return null;
+        return new DocumentRequestForm(name, dob, address, formID, aNum, docName, status);
     }
     public static DocumentRequestForm getForm(int formID){
         return null; 
@@ -93,9 +93,9 @@ public class DocumentRequestForm {
      * @return String the string containing the form information.
      */
     public String toString(){
-        //return "FormID: " + this.getFormID() + "\nStatus: " + this.getStatus() + "\nName: " + this.getName()
-        //+ "\nANumber: " + this.getANum() + "\nDOB: " + this.getDob() + "\nAddress: " + this.getAddress()
-        //+ "\nDocument: " + this.getDocName();
-        return null;
+        return "FormID: " + this.getFormID() + "\nStatus: " + this.getStatus() + "\nName: " + this.getName()
+        + "\nANumber: " + this.getANum() + "\nDOB: " + this.getDob() + "\nAddress: " + this.getAddress()
+        + "\nDocument: " + this.getDocName();
+        //return null;
     }
 }
