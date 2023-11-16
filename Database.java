@@ -1,15 +1,22 @@
 import java.util.ArrayList;
 
 public class Database {
-    ArrayList<String> DocNameList;
-    ArrayList<DocumentRequestForm> Forms;
+    private static ArrayList<DocumentRequestForm> Forms = new ArrayList<DocumentRequestForm>();
 
-    public DocumentRequestForm getFormData(int FormID){
+    public static DocumentRequestForm getFormData(int FormID){
         return Forms.get(FormID);
     }
 
-    public void saveFormData(DocumentRequestForm form){
-        Forms.add(form.getFormID(), form);
+    public static void saveFormData(DocumentRequestForm form){
+        Forms.add(form.getFormID() - 1, form);
+    }
+
+    public static int getNewFormID(){
+        return Forms.size() + 1;
+    }
+
+    public static int getdatabaseSize(){
+        return Forms.size();
     }
 
 }

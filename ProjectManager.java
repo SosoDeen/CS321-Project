@@ -1,48 +1,36 @@
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class ProjectManager {
-    private ArrayList<WorkflowItem> taskList;
-
-    private class WorkflowItem{
-        public int formID;
-        public String moduleID;
-
-        public WorkflowItem(int formID, String moduleID){
-            this.formID = formID;
-            this.moduleID = moduleID;
-        }
-    }
-
+    private static ArrayList<WorkFlowItem> taskList = new ArrayList<WorkFlowItem>();
 
     /**
      * Finds and removes the next task for the role.
      * @param moduleID the type of role
      * @return int the formID, returns -1 if none
      */
-    public int nextTask(String moduleID){
-        for (WorkflowItem currentTask : taskList){
+    public static int nextTask(String moduleID){
+        for (WorkFlowItem currentTask : taskList){
             if (currentTask.moduleID == moduleID){
                 return currentTask.formID;
             }
         }
 
-        // Means that no more items for that module
+        // Means no more items for that module
         return -1;
     }
 
     /**
-     * Adds a task back into the queue.
+     * Adds a task into the queue.
      * @param moduleID the id of the next job for the form.
      * @param formID the formID
      * @return String success on succes and an error message on failure
      */
-    public String addTask(String moduleID, int formID){
-        taskList.add(new WorkflowItem(formID, moduleID));
+    public static String addTask(String moduleID, int formID){
+        taskList.add(new WorkFlowItem(formID, moduleID));
         return "";
     }
 
-    public String sendEmail(String text){
-        return null;
+    public static int getTasklistSize(){
+        return taskList.size();
     }
 }
