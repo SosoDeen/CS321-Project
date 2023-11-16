@@ -68,7 +68,7 @@ public class DocumentRequestForm {
         return form;
     }
     public static DocumentRequestForm getForm(int formID){
-        return null; 
+        return Database.getFormData(formID); 
     }
     // /**
     //  * Validates that the database entries are complete.
@@ -81,7 +81,7 @@ public class DocumentRequestForm {
      * @return
      */
     public String saveToDatabase(){
-        return null;
+        return Database.saveFormData(this);
     }
     /**
      * Will try to find the address and document in the database and then send a signal to
