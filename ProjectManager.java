@@ -26,8 +26,14 @@ public class ProjectManager {
      * @return String success on succes and an error message on failure
      */
     public static String addTask(String moduleID, int formID){
-        taskList.add(new WorkFlowItem(formID, moduleID));
-        return "";
+        
+        try{
+            taskList.add(new WorkFlowItem(formID, moduleID)); 
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }    
+        return "Successful";
     }
 
     public static int getTasklistSize(){

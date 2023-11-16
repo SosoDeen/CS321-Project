@@ -8,7 +8,13 @@ public class Review{
     * @return true if it was able to be corrected or correct, false if otherwise.
     **/
     public boolean reviewForm(int formID){
+        if(formID == -1){
+            return false;
+        }
         return false;
+    }
+    public String getModuleID(){
+        return MODULEID;
     }
     /**
      * This method changes the desired type to be the new updated data
@@ -34,7 +40,7 @@ public class Review{
      * @return String the message from the database
      */
     public String saveForm(){
-        return null;
+        return form.saveToDatabase();
     }
 
 
