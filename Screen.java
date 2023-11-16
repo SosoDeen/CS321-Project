@@ -48,8 +48,6 @@ public class Screen extends JFrame implements ActionListener{
 
 
     // DE PARAMS --------------------------------------------------------------
-    /** Reference to Data Entry module */
-    private DataEntry dataEntryClass;
 
     /** DE instruction label */
     private JLabel DELabel;
@@ -87,11 +85,11 @@ public class Screen extends JFrame implements ActionListener{
         
         // initializes start frame
         super("Document Request Form");
-        setSize(780,790);
+        setSize(1000,550);
 
         // defines multiple frames
         dataEntry = new JFrame("Data Entry");
-        dataEntry.setSize(780,790);
+        dataEntry.setSize(1000,550);
         
         //dataEntry.setVisible(true);
 
@@ -117,6 +115,12 @@ public class Screen extends JFrame implements ActionListener{
         
         // start screen label
         startLabel = new JLabel("Choose your appropriate Module");
+
+        name = new JLabel("Name:");
+        dob = new JLabel("Date of Birth:");
+        address = new JLabel("Address:");
+        aNum = new JLabel("A-Number:");
+        docName = new JLabel("Requested Document Name:");
 
         // FIELDS -------------------------------------------------------------
         
@@ -173,12 +177,10 @@ public class Screen extends JFrame implements ActionListener{
 
     // ACTION LISTENER --------------------------------------------------------
 
-    /**
-     * Function to implement ActionListener
-     * @param event when the user hits a button
-     */
     public void actionPerformed(ActionEvent event) {
-        // finds which button was pressed
+        // Module instances
+
+        // Finds which button was pressed
         JButton sourceEvent = (JButton) event.getSource(); 
         
         if(sourceEvent == exitButton){
@@ -220,26 +222,28 @@ public class Screen extends JFrame implements ActionListener{
     // SCREEN DEFINITIONS -----------------------------------------------------
 
     public void StartScreenCall(){
+        // show start screens
         setVisible(true);
+
+        // clear other screens
+        dataEntry.getContentPane().removeAll();
+        dataEntry.repaint();
+        review.getContentPane().removeAll();
+        review.repaint();
+        approve.getContentPane().removeAll();
+        approve.repaint();
+        // hide other screens
         dataEntry.setVisible(false);
         review.setVisible(false);
         approve.setVisible(false);
     }
 
     public void DataEntryScreen(){
-        setVisible(false);
-
         GridBagConstraints layoutConst = null;
         dataEntry.setLayout(new GridBagLayout());
 
         // DE labels
         DELabel = new JLabel("Please fill in all the fields");
-        name = new JLabel("Name:");
-        dob = new JLabel("Date of Birth:");
-        address = new JLabel("Address:");
-        aNum = new JLabel("A-Number:");
-        docName = new JLabel("Requested Document Name:");
-
 
         // DE fields
         nameField = new JTextField(50);
@@ -270,6 +274,9 @@ public class Screen extends JFrame implements ActionListener{
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(this);
 
+        exitButton = new JButton("EXIT");
+        exitButton.addActionListener(this);
+
 
         // Place components
 
@@ -280,81 +287,54 @@ public class Screen extends JFrame implements ActionListener{
         layoutConst.gridy = 0;
         dataEntry.add(DELabel, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
         layoutConst.gridx = 0;
         layoutConst.gridy = 1;
         dataEntry.add(name, layoutConst);
         
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 0;
         layoutConst.gridy = 2;
         dataEntry.add(dob, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 0;
         layoutConst.gridy = 3;
         dataEntry.add(address, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 0;
         layoutConst.gridy = 4;
         dataEntry.add(aNum, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 0;
         layoutConst.gridy = 5;
-        dataEntry.add(docNameField, layoutConst);
+        dataEntry.add(docName, layoutConst);
 
         // Fields
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
         layoutConst.gridx = 1;
         layoutConst.gridy = 1;
         dataEntry.add(nameField, layoutConst);
         
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 1;
         layoutConst.gridy = 2;
         dataEntry.add(dobField, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 1;
         layoutConst.gridy = 3;
         dataEntry.add(addressField, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 1;
         layoutConst.gridy = 4;
         dataEntry.add(aNumField, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 1;
         layoutConst.gridy = 5;
         dataEntry.add(docNameField, layoutConst);
 
         // Buttons
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 0;
+        layoutConst.gridx = 1;
         layoutConst.gridy = 6;
         dataEntry.add(submitButton, layoutConst);
 
-        layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
-        layoutConst.gridx = 1;
-        layoutConst.gridy = 6;
+        layoutConst.gridx = 2;
         dataEntry.add(cancelButton, layoutConst);
 
+        layoutConst.gridx = 2;
+        layoutConst.gridy = 0;
+        dataEntry.add(exitButton, layoutConst);
+        
+
         dataEntry.setVisible(true);
+        setVisible(false);
     }
 
     public void approverScreen(){
@@ -394,11 +374,26 @@ public class Screen extends JFrame implements ActionListener{
         approve.setVisible(true);
     }
     
+    public void ShowScreen(String screenName){
+    setVisible(false);
+    dataEntry.setVisible(false);
+    review.setVisible(false);
+    approve.setVisible(false);
 
-    /**
-     * 
-     * @param args command line arguments
-     */
+    if (screenName.equals("Start")){
+        setVisible(true);
+    }
+    else if (screenName.equals("DataEntry")){
+        dataEntry.setVisible(true);
+    }
+    else if (screenName.equals("Review")){
+        review.setVisible(true);
+    }
+    else if (screenName.equals("Approve")){
+        approve.setVisible(true);
+    }
+    }
+
     public static void main(String[] args){
         Screen skweenn = new Screen();
     }
