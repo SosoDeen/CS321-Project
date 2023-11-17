@@ -1,6 +1,18 @@
 public class Approver {
-    public static String MODULEID = "Approver"; //needs to be constant //TODO needs to be changes for william
-    DocumentRequestForm form;
+    public static String MODULEID = "Approver";
+    private DocumentRequestForm form;
+
+    public DocumentRequestForm getForm(){
+        return form;
+    }
+
+    public String getModuleID(){
+        return MODULEID;
+    }
+
+    public void setForm(DocumentRequestForm newForm){
+        form = newForm;
+    }
 
     /** 
      * This method is meant to check if the data in the form
@@ -14,25 +26,27 @@ public class Approver {
     public boolean dataTest(){
         return false;
     }
-
-    
+ 
     //generate string, do not generate actual email
     public String acceptAndEmail(){
         return null;
     }
 
     //return documentrequestform to workflow with status set to review
-    public DocumentRequestForm rejectAndReturn(){
-        return null;
+    public void rejectAndReturn(String moduleID){
+        ProjectManager.addTask(moduleID, form.getFormID());
     }
 
-    public static DocumentRequestForm getCurrentForm(){
-        if(ProjectManager.getTasklistSize() == 0){
-            return null;
+    public String nextForm(){
+        int formID = ProjectManager.nextTask(MODULEID);
+        if(formID == -1){
+            form = null;
+            return "There are currently no request to approve.";
         }
         else{
-            return null;
+            form = DocumentRequestForm.getForm(formID);
+            return "Loading next form.";
         }
-
     }
+
 }

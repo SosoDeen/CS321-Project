@@ -90,6 +90,10 @@ public class StarScreen extends JFrame implements ActionListener{
     /** Button to load in next form */
     private JButton nextForm;
 
+    private JLabel welcome;
+
+    private Approver approver;
+
     // START SCREEN INIT ------------------------------------------------------
     /** Start screen constructor */
     public StarScreen()
@@ -248,13 +252,54 @@ public class StarScreen extends JFrame implements ActionListener{
             approverScreen();
         }
         else if(sourceEvent == approveButton){
+            if(approver.getForm() != null){
+                int count = ProjectManager.getModuleTaskListSize(Approver.MODULEID);
+                welcome = new JLabel("Approved: There are " + count + " form requests left.");
+                nameField.setText("");
+                dobField.setText("");
+                addressField.setText("");
+                aNumField.setText("");
+                docNameField.setText("");
+                approver.getForm().setStatus("Approved");
+                approver.setForm(null);
+
+            }
+            else{
+                welcome = new JLabel("There is currently no form up for approval");
+            }
 
         }
         else if(sourceEvent == rejectButton){
-
+            if(approver.getForm() != null){
+                int count = ProjectManager.getModuleTaskListSize(Approver.MODULEID);
+                welcome = new JLabel("Rejected: There are " + count + " form requests left.");
+                nameField.setText("");
+                dobField.setText("");
+                addressField.setText("");
+                aNumField.setText("");
+                docNameField.setText("");
+                approver.getForm().setStatus("Review");
+                approver.rejectAndReturn(Review.MODULEID);
+                approver.setForm(null);
+            }
+            else{
+                welcome = new JLabel("There is currently no form up for rejection");
+            }
         }
         else if(sourceEvent == nextForm){
-            
+            String errorMessage = approver.nextForm();
+            if(errorMessage.equals("Loading next form.")){
+                approver.setForm(Database.getFormData(ProjectManager.nextTask(approver.getModuleID())));
+                nameField.setText(approver.getForm().getName());
+                dobField.setText(approver.getForm().getDob());
+                addressField.setText(approver.getForm().getAddress());
+                aNumField.setText(approver.getForm().getANum()+"");
+                docNameField.setText(approver.getForm().getDocName());
+                welcome = new JLabel("Next form loaded");
+            }
+            else{
+                welcome = new JLabel("There is no form to load");
+            }
         }
     }
 
@@ -405,20 +450,70 @@ public class StarScreen extends JFrame implements ActionListener{
         layoutConst = new GridBagConstraints();
         layoutConst.insets = new Insets(10, 10, 10, 1);
         layoutConst.gridx = 0;
-        layoutConst.gridy = 3;
+        layoutConst.gridy = 1;
         approve.add(nextForm, layoutConst);
 
         layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
         layoutConst.gridx = 1;
-        layoutConst.gridy = 3;
         approve.add(approveButton, layoutConst);
 
         layoutConst = new GridBagConstraints();
-        layoutConst.insets = new Insets(10, 10, 10, 1);
         layoutConst.gridx = 2;
-        layoutConst.gridy = 3;
         approve.add(rejectButton, layoutConst);
+
+        layoutConst.gridx = 3;
+        approve.add(exitButton, layoutConst);
+
+        welcome = new JLabel("Approval");
+        name = new JLabel("Name: ");
+        dob = new JLabel("Date of Birth: ");
+        address = new JLabel("Address: ");
+        aNum = new JLabel("ANum: ");
+        docName = new JLabel("Document: ");
+
+        nameField = new JTextField(50);
+        nameField.setEditable(false);
+        dobField = new JTextField(50);
+        dobField.setEditable(false);
+        addressField = new JTextField(50);
+        addressField.setEditable(false);
+        aNumField = new JTextField(50);
+        aNumField.setEditable(false);
+        docNameField = new JTextField(50);
+        docNameField.setEditable(false);
+
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 0;
+        approve.add(welcome, layoutConst);
+
+        layoutConst.gridy = 2;
+        approve.add(name, layoutConst);
+        layoutConst.gridx = 1;
+        approve.add(nameField, layoutConst);
+
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 3;
+        approve.add(dob, layoutConst);
+        layoutConst.gridx = 1;
+        approve.add(dobField, layoutConst);
+
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 4;
+        approve.add(address, layoutConst);
+        layoutConst.gridx = 1;
+        approve.add(addressField, layoutConst);
+
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 5;
+        approve.add(aNum, layoutConst);
+        layoutConst.gridx = 1;
+        approve.add(aNumField, layoutConst);
+
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 6;
+        approve.add(docName, layoutConst);
+        layoutConst.gridx = 1;
+        approve.add(docNameField, layoutConst);
 
         approve.setVisible(true);
     }
