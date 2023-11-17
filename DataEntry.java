@@ -27,7 +27,7 @@ public class DataEntry {
         // create a new Document Request Form
         form = DocumentRequestForm.createForm(name, dob, address, Integer.parseInt(aNum), docName, "Added");
         // add form to worflow
-        ProjectManager.addTask("Review", form.getFormID());
+        ProjectManager.addTask(Review.MODULEID, form.getFormID());
 
         return "Form has been submitted!";
     }

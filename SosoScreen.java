@@ -91,8 +91,6 @@ public class SosoScreen extends JFrame implements ActionListener{
         // defines multiple frames
         dataEntry = new JFrame("Data Entry");
         dataEntry.setSize(1000,550);
-        
-        //dataEntry.setVisible(true);
 
         review = new JFrame("Data Entry");
         review.setSize(780,790);

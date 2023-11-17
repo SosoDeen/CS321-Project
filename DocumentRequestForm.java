@@ -47,8 +47,9 @@ public class DocumentRequestForm {
     public void setAddress(String Address){
         this.address = Address;
     }
-    // public void setANum(int aNum){
-    // }
+    public void setANum(int aNum){
+        this.aNum = aNum;
+    }
     // public void setFormID(int formID){
     // }
     public void setDocName(String docName){
@@ -68,7 +69,7 @@ public class DocumentRequestForm {
         return form;
     }
     public static DocumentRequestForm getForm(int formID){
-        return null; 
+        return Database.getFormData(formID-1); 
     }
     // /**
     //  * Validates that the database entries are complete.
@@ -81,7 +82,7 @@ public class DocumentRequestForm {
      * @return
      */
     public String saveToDatabase(){
-        return null;
+        return Database.saveFormData(this);
     }
     /**
      * Will try to find the address and document in the database and then send a signal to

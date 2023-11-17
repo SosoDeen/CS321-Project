@@ -14,12 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /** Represents the visual interface for iterating over reviews from a file
- * @author Somaya Zaheereldeen
+ * @author @author Somaya Zaheereldeen, Starling Devine, William  O'Brian
  */
-public class Screen extends JFrame implements ActionListener{
-    // START SCREEN PARAMS ----------------------------------------------------
-
-    private static ProjectManager workflow;
+public class StarScreen extends JFrame implements ActionListener{
+    // START SCREEN PARAMS ----------------------------------------------------    
     /** Start screen prompt */
     private JLabel startLabel;
     /** Button for opening Data Entry module */
@@ -46,6 +44,7 @@ public class Screen extends JFrame implements ActionListener{
     private JLabel aNum;
     private JLabel docName;
     private JLabel status;
+    private JLabel popupMessage;
     private JButton exitButton;
 
 
@@ -66,10 +65,22 @@ public class Screen extends JFrame implements ActionListener{
     /** Button for canceling form */
     private JButton cancelButton;
 
+    /** Data Entry class instance */
+    DataEntry dataEntryClass;
+
 
     // R PARAMS ---------------------------------------------------------------
+    private JLabel ReviewLabel;
+    private JLabel welcomeLabel;
+    private JTextField typeField;
+    private JTextField changeField;
     private JButton editButton;
     private JButton reviewAppButton;
+    private JButton cancelRevButton;
+    private JButton nextReviewButton;
+
+    private Review currentReview;
+    
 
     // A PARAMS ---------------------------------------------------------------
     /** Button for Approval to approve item */
@@ -79,9 +90,9 @@ public class Screen extends JFrame implements ActionListener{
     /** Button to load in next form */
     private JButton nextForm;
 
-
+    // START SCREEN INIT ------------------------------------------------------
     /** Start screen constructor */
-    public Screen()
+    public StarScreen()
     {
         // FRAMES -------------------------------------------------------------
         
@@ -92,16 +103,14 @@ public class Screen extends JFrame implements ActionListener{
         // defines multiple frames
         dataEntry = new JFrame("Data Entry");
         dataEntry.setSize(1000,550);
-        
-        //dataEntry.setVisible(true);
+        dataEntryClass = new DataEntry();
 
-        review = new JFrame("Data Entry");
+        review = new JFrame("Review");
         review.setSize(1000,550);
-        //review.setVisible(true);
+        currentReview = new Review();
 
-        approve = new JFrame("Data Entry");
+        approve = new JFrame("Approve");
         approve.setSize(780,790);
-        //approve.setVisible(true);
 
         // Module Exit button behaviour
         dataEntry.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -117,7 +126,6 @@ public class Screen extends JFrame implements ActionListener{
         
         // start screen label
         startLabel = new JLabel("Choose your appropriate Module");
-
         name = new JLabel("Name:");
         dob = new JLabel("Date of Birth:");
         address = new JLabel("Address:");
@@ -180,23 +188,32 @@ public class Screen extends JFrame implements ActionListener{
     // ACTION LISTENER --------------------------------------------------------
 
     public void actionPerformed(ActionEvent event) {
-        // Module instances
-
         // Finds which button was pressed
-        JButton sourceEvent = (JButton) event.getSource(); 
+        JButton sourceEvent = (JButton) event.getSource();
         
         if(sourceEvent == exitButton){
-            StartScreenCall();
+            startScreenCall();
+            if(currentReview.getForm() != null){
+                currentReview.addToFlow(Review.MODULEID);
+                currentReview = new Review();
+            }
         }
         // DATA ENTRY SCREEN AND BUTTON ACTIONS -------------------------------
         else if (sourceEvent == DEModuleButton) {
-            DataEntryScreen();
+            dataEntryScreen();
         }
         else if(sourceEvent == submitButton){
-            docNameField.setText("Submitted!");
+            String errormessage = dataEntryClass.createNewForm(nameField.getText(), dobField.getText(), 
+                                addressField.getText(), aNumField.getText(), docNameField.getText());
+
+            popupMessage.setVisible(true);
+            popupMessage.setText(errormessage);
+            
+            if (errormessage.equals("Form has been submitted!")) resetDEFields();
         }
         else if(sourceEvent == cancelButton){
-            docNameField.setText("Canceled!");
+            resetDEFields();
+            popupMessage.setText("Canceled Successfully!");
         }
 
 
@@ -206,14 +223,25 @@ public class Screen extends JFrame implements ActionListener{
 
         }
         else if (sourceEvent == editButton){
-            
-
+            currentReview.editData(nameField.getText(), dobField.getText(), addressField.getText(), aNumField.getText(), docNameField.getText());
+            popupMessage.setVisible(true);
+            popupMessage.setText("Updated!");
         }
         else if(sourceEvent == reviewAppButton){
+            currentReview.addToFlow(Approver.MODULEID);
 
+            int taskCount = ProjectManager.getModuleTaskListSize(Review.MODULEID);
+            welcomeLabel = new JLabel("Welcome to review! You have "+taskCount+" tasks left!");
+            setReviewFormVisibility(false);
         }
-
-
+        else if(sourceEvent == nextReviewButton){
+            String errorMessage = currentReview.setForm();
+            if(errorMessage.equals("Success")){
+                setReviewFormVisibility(true);
+                fillReviewFields(currentReview.getForm());
+            }
+            System.out.println(errorMessage);
+        }
 
         // APPROVER SCREEN AND BUTTON ACTIONS ---------------------------------
         else if(sourceEvent == AModuleButton){
@@ -232,7 +260,7 @@ public class Screen extends JFrame implements ActionListener{
 
     // SCREEN DEFINITIONS -----------------------------------------------------
 
-    public void StartScreenCall(){
+    public void startScreenCall(){
         // show start screens
         setVisible(true);
 
@@ -249,12 +277,19 @@ public class Screen extends JFrame implements ActionListener{
         approve.setVisible(false);
     }
 
-    public void DataEntryScreen(){
+    public void dataEntryScreen(){
         GridBagConstraints layoutConst = null;
         dataEntry.setLayout(new GridBagLayout());
 
         // DE labels
         DELabel = new JLabel("Please fill in all the fields");
+        popupMessage = new JLabel("I'm a popup message");
+        popupMessage.setVisible(false);
+        name.setVisible(true);
+        dob.setVisible(true);
+        address.setVisible(true);
+        aNum.setVisible(true);
+        docName.setVisible(true);
 
         // DE fields
         nameField = new JTextField(50);
@@ -298,6 +333,9 @@ public class Screen extends JFrame implements ActionListener{
         layoutConst.gridy = 0;
         dataEntry.add(DELabel, layoutConst);
 
+        layoutConst.gridy = 6;
+        dataEntry.add(popupMessage, layoutConst);
+
         layoutConst.gridx = 0;
         layoutConst.gridy = 1;
         dataEntry.add(name, layoutConst);
@@ -332,7 +370,7 @@ public class Screen extends JFrame implements ActionListener{
         dataEntry.add(docNameField, layoutConst);
 
         // Buttons
-        layoutConst.gridx = 1;
+        layoutConst.gridx = 0;
         layoutConst.gridy = 6;
         dataEntry.add(submitButton, layoutConst);
 
@@ -385,6 +423,144 @@ public class Screen extends JFrame implements ActionListener{
         approve.setVisible(true);
     }
     
+    public void reviewScreen(){
+
+        GridBagConstraints layoutConst =  new GridBagConstraints();
+        review.setLayout(new GridBagLayout());
+
+        popupMessage = new JLabel("I'm a popup message");
+        popupMessage.setVisible(false);
+
+        int taskCount = ProjectManager.getModuleTaskListSize(Review.MODULEID);
+        welcomeLabel = new JLabel("Welcome to review! You have "+taskCount+" tasks left!");
+        layoutConst.insets = new Insets(10, 10, 10, 1);
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 0;
+        review.add(welcomeLabel, layoutConst);
+        if(ProjectManager.getTasklistSize() == 0){
+            welcomeLabel.setText("There are no forms left to review!");
+        }
+
+        ReviewLabel = new JLabel("Apply Correction to the given data if needed then hit update");
+
+        // R fields
+        nameField = new JTextField(50);
+        nameField.setEditable(true);
+        nameField.setText("");
+
+        dobField = new JTextField(50);
+        dobField.setEditable(true);
+        dobField.setText("");
+
+        addressField = new JTextField(50);
+        addressField.setEditable(true);
+        addressField.setText("");
+
+        aNumField = new JTextField(50);
+        aNumField.setEditable(true);
+        aNumField.setText("");
+
+        docNameField = new JTextField(50);
+        docNameField.setEditable(true);
+        docNameField.setText("");
+
+        // DONT SHOW ON START
+        // labels
+        layoutConst.insets = new Insets(10, 10, 10, 1);
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 0;
+        ReviewLabel.setVisible(false);
+        review.add(ReviewLabel, layoutConst);
+
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 1;
+        name.setVisible(false);
+        review.add(name, layoutConst);
+        
+        layoutConst.gridy = 2;
+        dob.setVisible(false);
+        review.add(dob, layoutConst);
+
+        layoutConst.gridy = 3;
+        address.setVisible(false);
+        review.add(address, layoutConst);
+
+        layoutConst.gridy = 4;
+        aNum.setVisible(false);
+        review.add(aNum, layoutConst);
+
+        layoutConst.gridy = 5;
+        docName.setVisible(false);
+        review.add(docName, layoutConst);
+
+        // Fields
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 1;
+        nameField.setVisible(false);
+        review.add(nameField, layoutConst);
+        
+        layoutConst.gridy = 2;
+        dobField.setVisible(false);
+        review.add(dobField, layoutConst);
+
+        layoutConst.gridy = 3;
+        addressField.setVisible(false);
+        review.add(addressField, layoutConst);
+
+        layoutConst.gridy = 4;
+        aNumField.setVisible(false);
+        review.add(aNumField, layoutConst);
+
+        layoutConst.gridy = 5;
+        docNameField.setVisible(false);
+        review.add(docNameField, layoutConst);
+
+        // BUTTONS
+        editButton = new JButton("Update");
+        editButton.addActionListener(this);
+        layoutConst.gridx = 2;
+        layoutConst.gridy = 8;
+        editButton.setVisible(false);
+        review.add(editButton, layoutConst);
+
+        reviewAppButton = new JButton("Submit");
+        reviewAppButton.addActionListener(this);
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 8;
+        reviewAppButton.setVisible(false);
+        review.add(reviewAppButton, layoutConst);
+        
+        // FIX: rename cancel button
+        cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(this);
+        layoutConst.gridx = 2;
+        layoutConst.gridy = 8;
+        cancelButton.setVisible(false);
+        review.add(cancelButton, layoutConst);
+       
+
+        // SHOW ON START
+        exitButton = new JButton("EXIT");
+        exitButton.addActionListener(this);
+        nextReviewButton = new JButton("Get Next");
+        nextReviewButton.addActionListener(this);
+
+        layoutConst.gridx = 2;
+        layoutConst.gridy = 0;
+        review.add(exitButton, layoutConst);
+        layoutConst.gridx = 3;
+        layoutConst.gridy = 0;
+        review.add(nextReviewButton, layoutConst);
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 6;
+        review.add(popupMessage, layoutConst);
+
+        review.setVisible(true);
+        setVisible(false);
+    }
+    
+    // HELPER METHODS ---------------------------------------------------------
+
     public void ShowScreen(String screenName){
         setVisible(false);
         dataEntry.setVisible(false);
@@ -404,148 +580,52 @@ public class Screen extends JFrame implements ActionListener{
             approve.setVisible(true);
         }
     }
-    
-    public void reviewScreen(){
-        GridBagConstraints layoutConst =  new GridBagConstraints();
-        review.setLayout(new GridBagLayout());
-        DocumentRequestForm tester = DocumentRequestForm.createForm("Test 1", "October", "113 tester", 1000234, "Book", "Review");
-        workflow.addTask(Review.getModuleID(), tester.getFormID());
 
-        Review obj;
-        int formID = workflow.nextTask(Review.getModuleID());
-        if(formID> -1){
-            obj = new Review(formID);
-            
+    public void fillReviewFields(DocumentRequestForm form){
+        // fill review fields with form data
+        nameField.setText(form.getName());
+        dobField.setText(form.getDob());
+        addressField.setText(form.getAddress());
+        aNumField.setText(form.getANum() + "");
+        docNameField.setText(form.getDocName());
+    }
 
-            // DE labels
-            JLabel ReviewLabel = new JLabel("Enter the type of Item you want to change and the change");
+    public void setReviewFormVisibility(boolean state){
+        welcomeLabel.setVisible(!state);
+        // labels
+        popupMessage.setVisible(false);
+        ReviewLabel.setVisible(state);
+        name.setVisible(state);
+        dob.setVisible(state);
+        address.setVisible(state);
+        aNum.setVisible(state);
+        docName.setVisible(state);
 
-            // DE fields
-            nameField = new JTextField(50);
-            nameField.setEditable(false);
-            nameField.setText(obj.getForm().getName());
+        // Fields
+        nameField.setVisible(state);
+        dobField.setVisible(state);
+        addressField.setVisible(state);
+        aNumField.setVisible(state);
+        docNameField.setVisible(state);
 
-            dobField = new JTextField(50);
-            dobField.setEditable(false);
-            dobField.setText(obj.getForm().getDob());
+        // BUTTONS
+        editButton.setVisible(state);
+        reviewAppButton.setVisible(state);
+        // FIX: rename cancel button
+        cancelButton.setVisible(state);
+        nextReviewButton.setVisible(!state);
+    }
 
-            addressField = new JTextField(50);
-            addressField.setEditable(false);
-            addressField.setText(obj.getForm().getAddress());
-
-            aNumField = new JTextField(50);
-            aNumField.setEditable(false);
-            aNumField.setText(obj.getForm().getANum() + "");
-
-            docNameField = new JTextField(50);
-            docNameField.setEditable(false);
-            docNameField.setText(obj.getForm().getDocName());
-
-            // Place components
-
-            // labels
-            layoutConst.insets = new Insets(10, 10, 10, 1);
-            layoutConst.gridx = 1;
-            layoutConst.gridy = 0;
-            review.add(ReviewLabel, layoutConst);
-
-            layoutConst.gridx = 0;
-            layoutConst.gridy = 1;
-            review.add(name, layoutConst);
-            
-            layoutConst.gridy = 2;
-            review.add(dob, layoutConst);
-
-            layoutConst.gridy = 3;
-            review.add(address, layoutConst);
-
-            layoutConst.gridy = 4;
-            review.add(aNum, layoutConst);
-
-            layoutConst.gridy = 5;
-            review.add(docName, layoutConst);
-
-            // Fields
-            layoutConst.gridx = 1;
-            layoutConst.gridy = 1;
-            review.add(nameField, layoutConst);
-            
-            layoutConst.gridy = 2;
-            review.add(dobField, layoutConst);
-
-            layoutConst.gridy = 3;
-            review.add(addressField, layoutConst);
-
-            layoutConst.gridy = 4;
-            review.add(aNumField, layoutConst);
-
-            layoutConst.gridy = 5;
-            review.add(docNameField, layoutConst);
-
-            JLabel type = new JLabel("Type of Change: ");
-            layoutConst.insets = new Insets(10, 10, 10, 1);
-            layoutConst.gridx = 0;
-            layoutConst.gridy = 6;
-            review.add(type, layoutConst);
-
-            JTextField typeField= new JTextField(50);
-            typeField.setEditable(true);
-            typeField.setText("");
-            layoutConst.gridx = 1;
-            layoutConst.gridy = 6;
-            review.add(typeField, layoutConst);
-
-            JLabel change = new JLabel("Correction: ");
-            layoutConst.insets = new Insets(10, 10, 10, 1);
-            layoutConst.gridx = 0;
-            layoutConst.gridy = 7;
-            review.add(change, layoutConst);
-
-            JTextField changeField= new JTextField(50);
-            typeField.setEditable(true);
-            typeField.setText("");
-            layoutConst.gridx = 1;
-            layoutConst.gridy = 7;
-            review.add(changeField, layoutConst);
-
-
-        }
-        else{
-            JLabel text = new JLabel("There is no forms left to review!");
-            review.add(text, layoutConst);
-
-        }
-        // Buttons
-        submitButton = new JButton("Approve");
-        submitButton.addActionListener(this);
-
-        cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(this);
-
-        exitButton = new JButton("EXIT");
-        exitButton.addActionListener(this);
-
-        layoutConst.gridx = 1;
-        layoutConst.gridy = 8;
-        review.add(submitButton, layoutConst);
-
-        layoutConst.gridx = 2;
-        review.add(cancelButton, layoutConst);
-
-        layoutConst.gridx = 2;
-        layoutConst.gridy = 0;
-        review.add(exitButton, layoutConst);
-        
-
-
-        review.setVisible(true);
-        setVisible(false);
-
+    public void resetDEFields(){
+        nameField.setText("");
+        dobField.setText("");
+        addressField.setText("");
+        aNumField.setText("");
+        docNameField.setText("");
     }
 
     public static void main(String[] args){
-        workflow = new ProjectManager();
-        Screen skweenn = new Screen();
+        StarScreen skweenn = new StarScreen();
         
     }
 }

@@ -1,5 +1,5 @@
 public class Approver {
-    String MODULEID = "Approver"; //needs to be constant
+    public static String MODULEID = "Approver"; //needs to be constant //TODO needs to be changes for william
     DocumentRequestForm form;
 
     /** 

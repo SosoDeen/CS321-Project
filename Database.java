@@ -7,8 +7,10 @@ public class Database {
         return Forms.get(FormID);
     }
 
-    public static void saveFormData(DocumentRequestForm form){
+    public static String saveFormData(DocumentRequestForm form){
         Forms.add(form.getFormID() - 1, form);
+        return "Sucess";
+
     }
 
     public static int getNewFormID(){

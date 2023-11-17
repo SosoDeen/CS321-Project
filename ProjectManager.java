@@ -10,7 +10,8 @@ public class ProjectManager {
      */
     public static int nextTask(String moduleID){
         for (WorkFlowItem currentTask : taskList){
-            if (currentTask.moduleID == moduleID){
+            if (currentTask.moduleID.equals(moduleID)){
+                taskList.remove(currentTask);
                 return currentTask.formID;
             }
         }
@@ -18,6 +19,7 @@ public class ProjectManager {
         // Means no more items for that module
         return -1;
     }
+
 
     /**
      * Adds a task into the queue.
@@ -28,15 +30,27 @@ public class ProjectManager {
     public static String addTask(String moduleID, int formID){
         
         try{
-            taskList.add(new WorkFlowItem(formID, moduleID)); 
+            taskList.add(formID-1, new WorkFlowItem(formID, moduleID)); 
         }
         catch(Exception e){
-            return e.getMessage();
+            System.out.println("HEELPP "+e.getMessage());
         }    
         return "Successful";
     }
 
     public static int getTasklistSize(){
         return taskList.size();
+    }
+
+    public static int getModuleTaskListSize(String moduleID){
+        int taskCount = 0;
+
+        for (WorkFlowItem currentTask : taskList){
+            if (currentTask.moduleID.equals(moduleID)){
+                taskCount++;
+            }
+        }
+
+        return taskCount;
     }
 }
