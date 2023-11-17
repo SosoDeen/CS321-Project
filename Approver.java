@@ -25,4 +25,14 @@ public class Approver {
     public DocumentRequestForm rejectAndReturn(){
         return null;
     }
+
+    public static DocumentRequestForm getCurrentForm(){
+        if(ProjectManager.getTasklistSize() == 0){
+            return null;
+        }
+        else{
+            return null;
+        }
+
+    }
 }
