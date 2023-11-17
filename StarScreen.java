@@ -202,6 +202,10 @@ public class StarScreen extends JFrame implements ActionListener{
                 currentReview.addToFlow(Review.MODULEID);
                 currentReview = new Review();
             }
+            if(approver.getForm() != null){
+                approver.rejectAndReturn(Approver.MODULEID);
+                approver = new Approver();
+            }
         }
         // DATA ENTRY SCREEN AND BUTTON ACTIONS -------------------------------
         else if (sourceEvent == DEModuleButton) {
@@ -263,7 +267,7 @@ public class StarScreen extends JFrame implements ActionListener{
                 docNameField.setText(" ");
                 approver.acceptAndEmail("Email");
                 approver.getForm().setStatus("Approved");
-                approver.setForm(null);
+                approver = new Approver();
                 nextForm.setVisible(true);
                 approveButton.setVisible(false);
                 rejectButton.setVisible(false);
@@ -284,7 +288,7 @@ public class StarScreen extends JFrame implements ActionListener{
                 docNameField.setText(" ");
                 approver.getForm().setStatus("Review");
                 approver.rejectAndReturn(Review.MODULEID);
-                approver.setForm(null);
+                approver = new Approver();
                 nextForm.setVisible(true);
                 approveButton.setVisible(false);
                 rejectButton.setVisible(false);
