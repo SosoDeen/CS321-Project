@@ -114,7 +114,8 @@ public class StarScreen extends JFrame implements ActionListener{
         currentReview = new Review();
 
         approve = new JFrame("Approve");
-        approve.setSize(780,790);
+        approve.setSize(1000,550);
+        approver = new Approver();
 
         // Module Exit button behaviour
         dataEntry.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -254,18 +255,21 @@ public class StarScreen extends JFrame implements ActionListener{
         else if(sourceEvent == approveButton){
             if(approver.getForm() != null){
                 int count = ProjectManager.getModuleTaskListSize(Approver.MODULEID);
-                welcome = new JLabel("Approved: There are " + count + " form requests left.");
-                nameField.setText("");
-                dobField.setText("");
-                addressField.setText("");
-                aNumField.setText("");
-                docNameField.setText("");
+                welcome.setText("Approved: There are " + count + " form requests left.");
+                nameField.setText(" ");
+                dobField.setText(" ");
+                addressField.setText(" ");
+                aNumField.setText(" ");
+                docNameField.setText(" ");
+                approver.acceptAndEmail("Email");
                 approver.getForm().setStatus("Approved");
                 approver.setForm(null);
-
+                nextForm.setVisible(true);
+                approveButton.setVisible(false);
+                rejectButton.setVisible(false);
             }
             else{
-                welcome = new JLabel("There is currently no form up for approval");
+                welcome.setText("There is currently no form up for approval");
             }
 
         }
@@ -273,32 +277,37 @@ public class StarScreen extends JFrame implements ActionListener{
             if(approver.getForm() != null){
                 int count = ProjectManager.getModuleTaskListSize(Approver.MODULEID);
                 welcome = new JLabel("Rejected: There are " + count + " form requests left.");
-                nameField.setText("");
-                dobField.setText("");
-                addressField.setText("");
-                aNumField.setText("");
-                docNameField.setText("");
+                nameField.setText(" ");
+                dobField.setText(" ");
+                addressField.setText(" ");
+                aNumField.setText(" ");
+                docNameField.setText(" ");
                 approver.getForm().setStatus("Review");
                 approver.rejectAndReturn(Review.MODULEID);
                 approver.setForm(null);
+                nextForm.setVisible(true);
+                approveButton.setVisible(false);
+                rejectButton.setVisible(false);
             }
             else{
-                welcome = new JLabel("There is currently no form up for rejection");
+                welcome.setText("There is currently no form up for rejection");
             }
         }
         else if(sourceEvent == nextForm){
             String errorMessage = approver.nextForm();
-            if(errorMessage.equals("Loading next form.")){
-                approver.setForm(Database.getFormData(ProjectManager.nextTask(approver.getModuleID())));
+            if(errorMessage.equals("Loading next form.")){ 
                 nameField.setText(approver.getForm().getName());
                 dobField.setText(approver.getForm().getDob());
                 addressField.setText(approver.getForm().getAddress());
                 aNumField.setText(approver.getForm().getANum()+"");
                 docNameField.setText(approver.getForm().getDocName());
-                welcome = new JLabel("Next form loaded");
+                welcome.setText("Next form loaded.");
+                nextForm.setVisible(false);
+                approveButton.setVisible(true);
+                rejectButton.setVisible(true);
             }
             else{
-                welcome = new JLabel("There is no form to load");
+                welcome.setText("There is currently no form to load.");
             }
         }
     }
@@ -447,10 +456,13 @@ public class StarScreen extends JFrame implements ActionListener{
         nextForm = new JButton("Load Next Form");
         nextForm.addActionListener(this);
 
+        exitButton = new JButton("Exit");
+        exitButton.addActionListener(this);
+
         layoutConst = new GridBagConstraints();
         layoutConst.insets = new Insets(10, 10, 10, 1);
         layoutConst.gridx = 0;
-        layoutConst.gridy = 1;
+        layoutConst.gridy = 0;
         approve.add(nextForm, layoutConst);
 
         layoutConst = new GridBagConstraints();
@@ -464,7 +476,7 @@ public class StarScreen extends JFrame implements ActionListener{
         layoutConst.gridx = 3;
         approve.add(exitButton, layoutConst);
 
-        welcome = new JLabel("Approval");
+        welcome = new JLabel("");
         name = new JLabel("Name: ");
         dob = new JLabel("Date of Birth: ");
         address = new JLabel("Address: ");
@@ -483,7 +495,7 @@ public class StarScreen extends JFrame implements ActionListener{
         docNameField.setEditable(false);
 
         layoutConst.gridx = 0;
-        layoutConst.gridy = 0;
+        layoutConst.gridy = 7;
         approve.add(welcome, layoutConst);
 
         layoutConst.gridy = 2;
@@ -514,6 +526,9 @@ public class StarScreen extends JFrame implements ActionListener{
         approve.add(docName, layoutConst);
         layoutConst.gridx = 1;
         approve.add(docNameField, layoutConst);
+
+        approveButton.setVisible(false);
+        rejectButton.setVisible(false);
 
         approve.setVisible(true);
     }

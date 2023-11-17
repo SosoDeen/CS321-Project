@@ -28,8 +28,8 @@ public class Approver {
     }
  
     //generate string, do not generate actual email
-    public String acceptAndEmail(){
-        return null;
+    public void acceptAndEmail(String moduleID){
+        ProjectManager.addTask(moduleID, form.getFormID());
     }
 
     //return documentrequestform to workflow with status set to review
@@ -40,11 +40,11 @@ public class Approver {
     public String nextForm(){
         int formID = ProjectManager.nextTask(MODULEID);
         if(formID == -1){
-            form = null;
+            setForm(null);
             return "There are currently no request to approve.";
         }
         else{
-            form = DocumentRequestForm.getForm(formID);
+            setForm(DocumentRequestForm.getForm(formID));
             return "Loading next form.";
         }
     }
