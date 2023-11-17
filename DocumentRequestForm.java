@@ -47,8 +47,9 @@ public class DocumentRequestForm {
     public void setAddress(String Address){
         this.address = Address;
     }
-    // public void setANum(int aNum){
-    // }
+    public void setANum(int aNum){
+        this.aNum = aNum;
+    }
     // public void setFormID(int formID){
     // }
     public void setDocName(String docName){
@@ -68,7 +69,7 @@ public class DocumentRequestForm {
         return form;
     }
     public static DocumentRequestForm getForm(int formID){
-        return Database.getFormData(formID); 
+        return Database.getFormData(formID-1); 
     }
     // /**
     //  * Validates that the database entries are complete.

@@ -1,14 +1,24 @@
 public class Review{
-    private static String MODULEID = "Review";
+    public static String MODULEID = "Review";
     private DocumentRequestForm form;
+    
+    
+    
     /**
     * This method will compare the form ID to the information of the A# to check
     *if the form is correct. If the form is not correct then the form is edited.
     *
     * @return true if it was able to be corrected or correct, false if otherwise.
     **/
-    public Review(int formID){
+    public String setForm(){
+        int formID = ProjectManager.nextTask(MODULEID);
+        if(formID == -1){
+            form = null;
+            return "No more tasks to review!";
+        }
+
         form = DocumentRequestForm.getForm(formID);
+        return "Success";
     }
     public DocumentRequestForm getForm(){
         return form;
@@ -28,18 +38,15 @@ public class Review{
      * @param form
      * @return
      */
-    protected DocumentRequestForm editData(String type, String change){  
-        if(type.equals("Name")){
-            form.setName(change);
-        }  
-        else if(type.equals("DOB")){
-            form.setDob(change);
-        }
-        else if(type.equals("Address")){
-            form.setAddress(change);
-        }
-        else if(type.equals("Document Name")){
-            form.setDocName(change);
+    protected DocumentRequestForm editData(String name, String dob, String address, String aNum, String docName){  
+        form.setName(name);
+        form.setDob(dob);
+        form.setAddress(address);
+        form.setDocName(docName);
+        try {
+            form.setANum(Integer.parseInt(aNum));
+        } catch (Exception e) {
+            System.out.println("BAD A-NUM");
         }
         return form;
     }
@@ -59,6 +66,9 @@ public class Review{
      */
     public String saveForm(){
         return form.saveToDatabase();
+    }
+    public String addToFlow(String moduleID){
+        return ProjectManager.addTask(moduleID, form.getFormID());
     }
 
 
