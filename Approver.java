@@ -14,20 +14,7 @@ public class Approver {
         form = newForm;
     }
 
-    /** 
-     * This method is meant to check if the data in the form
-     * is valid. 
-     * 
-     * Note that this method leads into acceptAndEmail if data is valid 
-     * and rejectAndReturn if data is invalid
-     * 
-     * @return true if valid and false otherwise.
-     **/
-    public boolean dataTest(){
-        return false;
-    }
- 
-    //generate string, do not generate actual email
+    
     public void acceptAndEmail(String moduleID){
         ProjectManager.addTask(moduleID, form.getFormID());
     }
@@ -35,6 +22,7 @@ public class Approver {
     //return documentrequestform to workflow with status set to review
     public void rejectAndReturn(String moduleID){
         ProjectManager.addTask(moduleID, form.getFormID());
+        form.setStatus("Review");
     }
 
     public String nextForm(){

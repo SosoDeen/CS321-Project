@@ -30,7 +30,7 @@ public class ProjectManager {
     public static String addTask(String moduleID, int formID){
         
         try{
-            taskList.add(formID-1, new WorkFlowItem(formID, moduleID)); 
+            taskList.add(new WorkFlowItem(formID, moduleID)); 
         }
         catch(Exception e){
             System.out.println("HEELPP "+e.getMessage());
