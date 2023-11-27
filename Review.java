@@ -23,12 +23,12 @@ public class Review{
     public DocumentRequestForm getForm(){
         return form;
     }
-    public boolean reviewForm(int formID){
-        if(formID == -1){
-            return false;
-        }
-        return false;
-    }
+    // public boolean reviewForm(int formID){
+    //     if(formID == -1){
+    //         return false;
+    //     }
+    //     return false;
+    // }
     public static String getModuleID(){
         return MODULEID;
     }
