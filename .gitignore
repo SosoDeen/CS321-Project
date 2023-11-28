@@ -1,2 +1,21 @@
 *.class
-s
+
+# Main dir class files
+src/main/java/org/OriginalDocReqFormPkg/WorkFlowItem.class
+src/main/java/org/OriginalDocReqFormPkg/StarScreen.class
+src/main/java/org/OriginalDocReqFormPkg/Review.class
+src/main/java/org/OriginalDocReqFormPkg/ProjectManager.class
+src/main/java/org/OriginalDocReqFormPkg/DocumentRequestForm.class
+src/main/java/org/OriginalDocReqFormPkg/DataEntry.class
+src/main/java/org/OriginalDocReqFormPkg/Database.class
+src/main/java/org/OriginalDocReqFormPkg/Approver.class
+
+# Tatget dir class files
+target/classes/org/OriginalDocReqFormPkg/
+target/test-classes/org/OriginalDocReqFormPkg/
+
+# Maven Compiler Changes
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
