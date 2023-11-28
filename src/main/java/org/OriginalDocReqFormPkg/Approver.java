@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 
 public class Approver {
     public static String MODULEID = "Approver";
@@ -17,14 +17,26 @@ public class Approver {
     }
 
     
-    public void acceptAndEmail(String moduleID){
-        ProjectManager.addTask(moduleID, form.getFormID());
+    public String acceptAndEmail(String moduleID){
+        if (moduleID.equals("Email")){
+            ProjectManager.addTask(moduleID, form.getFormID());
+            return "Email";
+        }
+        else{
+            return "Invalid moduleID";
+        }
     }
 
     //return documentrequestform to workflow with status set to review
-    public void rejectAndReturn(String moduleID){
-        ProjectManager.addTask(moduleID, form.getFormID());
-        form.setStatus("Review");
+    public String rejectAndReturn(String moduleID){
+        if(moduleID.equals(Review.MODULEID)){
+            ProjectManager.addTask(moduleID, form.getFormID());
+            form.setStatus("Review");
+            return Review.MODULEID;
+        }
+        else{
+            return "Invalid moduleID";
+        }
     }
 
     public String nextForm(){

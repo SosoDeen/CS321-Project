@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 
 import org.junit.*;
 import static org.junit.Assert.*;
