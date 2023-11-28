@@ -6,12 +6,12 @@ import static org.junit.Assert.*;
 
 public class ApproverTester {
     Approver obj = new Approver();
-    DocumentRequestForm a = new DocumentRequestForm("John Doe", "01/01/2001/", "12345", 
-    1, 20202020, "Document", "Approver");
     
     @Test
     public void acceptTest(){
-        obj.setForm(a);
+        
+        obj.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
 
         String result = obj.acceptAndEmail("Email");
         String expected = "Email";
@@ -21,7 +21,9 @@ public class ApproverTester {
 
     @Test
     public void rejectTest(){
-        obj.setForm(a);
+        
+        obj.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
 
         String result = obj.rejectAndReturn(Review.MODULEID);
         String expected = Review.MODULEID;
@@ -39,7 +41,8 @@ public class ApproverTester {
 
     @Test
     public void nextFormTest(){
-        obj.setForm(a);
+        obj.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
 
         ProjectManager.addTask(Approver.MODULEID, obj.getForm().getFormID());
 

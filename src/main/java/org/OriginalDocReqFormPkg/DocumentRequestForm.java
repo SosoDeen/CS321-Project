@@ -9,7 +9,7 @@ public class DocumentRequestForm {
     private String docName;
     private String status;
 
-    public DocumentRequestForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
+    private DocumentRequestForm(String name, String dob, String address,int formID, int aNum, String docName, String status){
         this.name = name;
         this.dob = dob;
         this.address = address;
