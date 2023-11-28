@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 
 import java.awt.Insets;
 import javax.swing.JFrame;

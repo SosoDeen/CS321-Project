@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 import java.util.ArrayList;
 
 public class ProjectManager {
