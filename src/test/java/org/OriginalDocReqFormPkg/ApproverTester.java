@@ -7,12 +7,10 @@ import static org.junit.Assert.*;
 public class ApproverTester {
     Approver obj = new Approver();
     DocumentRequestForm a = new DocumentRequestForm("John Doe", "01/01/2001/", "12345", 
-    100, 20202020, "Document", "Approver");
+    1, 20202020, "Document", "Approver");
     
-
     @Test
     public void acceptTest(){
-        
         obj.setForm(a);
 
         String result = obj.acceptAndEmail("Email");
@@ -21,8 +19,8 @@ public class ApproverTester {
         assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
     }
 
+    @Test
     public void rejectTest(){
-        
         obj.setForm(a);
 
         String result = obj.rejectAndReturn(Review.MODULEID);
@@ -31,6 +29,7 @@ public class ApproverTester {
         assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
     }
 
+    @Test
     public void noFormsLeftTest(){
         String result = obj.nextForm();
         String expected = "There are currently no request to approve.";
@@ -38,6 +37,7 @@ public class ApproverTester {
         assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
     }
 
+    @Test
     public void nextFormTest(){
         obj.setForm(a);
 
