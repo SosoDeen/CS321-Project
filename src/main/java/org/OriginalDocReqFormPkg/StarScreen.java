@@ -3,14 +3,10 @@ package OriginalDocReqFormPkg;
 import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 import java.awt.GridBagLayout;
-import javax.swing.JScrollPane;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,21 +27,14 @@ public class StarScreen extends JFrame implements ActionListener{
     /** Screen frames */
     private JFrame dataEntry, review, approve;
 
-    /** (OLD) Label to display iteration */
-    private JTextArea iterPrint;
-    /** (OLD) Allows to scroll in field display */
-    private JScrollPane scrollPane;
-
 
     // SHARED PARAMS ----------------------------------------------------------
     /** Document Request Form labels */
     private JLabel name;
     private JLabel dob;
     private JLabel address;
-    private JLabel formID;
     private JLabel aNum;
     private JLabel docName;
-    private JLabel status;
     private JLabel popupMessage;
     private JButton exitButton;
 
@@ -74,11 +63,8 @@ public class StarScreen extends JFrame implements ActionListener{
     // R PARAMS ---------------------------------------------------------------
     private JLabel ReviewLabel;
     private JLabel welcomeLabel;
-    private JTextField typeField;
-    private JTextField changeField;
     private JButton editButton;
     private JButton reviewAppButton;
-    private JButton cancelRevButton;
     private JButton nextReviewButton;
 
     private Review currentReview;
@@ -139,19 +125,6 @@ public class StarScreen extends JFrame implements ActionListener{
         aNum = new JLabel("A-Number:");
         docName = new JLabel("Requested Document Name:");
 
-        // FIELDS -------------------------------------------------------------
-        
-        // Editable field
-        nameField = new JTextField(20);
-        nameField.setEditable(true);
-        nameField.setText("");
-
-        // Uneditable field
-        iterPrint = new JTextArea(30, 50);
-        scrollPane = new JScrollPane(iterPrint); 
-        iterPrint.setLineWrap(true);
-        iterPrint.setEditable(false);
-        
 
         // BUTTONS ------------------------------------------------------------
 
@@ -742,6 +715,5 @@ public class StarScreen extends JFrame implements ActionListener{
 
     public static void main(String[] args){
         StarScreen skweenn = new StarScreen();
-        
     }
 }
