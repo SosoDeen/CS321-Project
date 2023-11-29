@@ -7,9 +7,9 @@ import java.util.*;
 
 public class DocumentRequestFormTester {
 
-    DocumentRequestForm form = new DocumentRequestForm("John Doe", "January 2", 
-    "123 Test St.", 100, 200, "Book", "Test");
-    String expectedString = "FormID: 100\nStatus: Test\nName: John Doe\nANumber: 200\nDOB: January 2\nAddress: 123 Test St.\nDocument: Book";
+    //DocumentRequestForm form = new DocumentRequestForm("John Doe", "January 2", 
+    //"123 Test St.", 100, 200, "Book", "Test");
+    //String expectedString = "FormID: 100\nStatus: Test\nName: John Doe\nANumber: 200\nDOB: January 2\nAddress: 123 Test St.\nDocument: Book";
     @Test
     public void getSetNameTest(){
         //assertEquals("Incorrect Item/Value, expected John Doe, but was " + form.getName(), "John Doe", form.getName());

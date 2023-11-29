@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 //import java.util.*;
 
 public class ProjectManagerTester {
-    DocumentRequestForm form1 = new DocumentRequestForm("John Doe", "January 2", 
-    "123 Test St.", 100, 200, "Book", "Test");
-    DocumentRequestForm form2 = new DocumentRequestForm("John", "January 4", 
-    "123 Test St.", 101, 201, "Book", "Test");
-    DocumentRequestForm form3 = new DocumentRequestForm("Jane", "January 2", 
-    "123 Test St.", 102, 202, "Book", "Test");
-    ProjectManager manager = new ProjectManager();
+    //DocumentRequestForm form1 = new DocumentRequestForm("John Doe", "January 2", 
+    //"123 Test St.", 100, 200, "Book", "Test");
+    //DocumentRequestForm form2 = new DocumentRequestForm("John", "January 4", 
+    //"123 Test St.", 101, 201, "Book", "Test");
+    //DocumentRequestForm form3 = new DocumentRequestForm("Jane", "January 2", 
+    ////"123 Test St.", 102, 202, "Book", "Test");
+    //ProjectManager manager = new ProjectManager();
     @Test
     public void testAdd(){
        // ProjectManager manager = new ProjectManager();

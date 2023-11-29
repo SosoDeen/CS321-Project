@@ -30,9 +30,19 @@ public class Approver {
     //return documentrequestform to workflow with status set to review
     public String rejectAndReturn(String moduleID){
         if(moduleID.equals(Review.MODULEID)){
+            int before = ProjectManager.getModuleTaskListSize(Review.MODULEID);
+
             ProjectManager.addTask(moduleID, form.getFormID());
             form.setStatus("Review");
-            return Review.MODULEID;
+
+            int after = ProjectManager.getModuleTaskListSize(Review.MODULEID);
+
+            if(before + 1 == after){
+                return "Successfully Rejected";
+            }
+            else{
+                return "Task was not added to Review task list";
+            }
         }
         else{
             return "Invalid moduleID";
