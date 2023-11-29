@@ -1,0 +1,9 @@
+org\OriginalDocReqFormPkg\DocumentRequestForm.class
+org\OriginalDocReqFormPkg\Database.class
+org\OriginalDocReqFormPkg\DataEntry.class
+org\OriginalDocReqFormPkg\ProjectManager.class
+org\OriginalDocReqFormPkg\SosoScreen.class
+org\OriginalDocReqFormPkg\WorkFlowItem.class
+org\OriginalDocReqFormPkg\StarScreen.class
+org\OriginalDocReqFormPkg\Approver.class
+org\OriginalDocReqFormPkg\Review.class

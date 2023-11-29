@@ -1,24 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.openjfx</groupId>
-  <artifactId>hellofx</artifactId>
+  <groupId>org.OriginalDocReqFormPkg</groupId>
+  <artifactId>CS321-Project</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>demo</name>
+  <name>Final Project</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>17.0.1</javafx.version>
-    <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>${javafx.version}</version>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.2</version>
+        <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>junit</groupId>
@@ -29,14 +28,6 @@
   
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>${javafx.maven.plugin.version}</version>
-        <configuration>
-          <mainClass>HelloFX</mainClass>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
   
