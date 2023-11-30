@@ -16,7 +16,6 @@ public class ProjectManager {
                 return currentTask.formID;
             }
         }
-
         // Means no more items for that module
         return -1;
     }
@@ -29,12 +28,14 @@ public class ProjectManager {
      * @return String success on succes and an error message on failure
      */
     public static String addTask(String moduleID, int formID){
-        
+        if(DocumentRequestForm.getForm(formID) == null){
+            return "Invalid FormID";
+        }
         try{
             taskList.add(new WorkFlowItem(formID, moduleID)); 
         }
         catch(Exception e){
-            System.out.println("HEELPP "+e.getMessage());
+           return "Error "+ e.getMessage();
         }    
         return "Successful";
     }
