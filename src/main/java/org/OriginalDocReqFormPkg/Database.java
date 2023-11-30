@@ -22,4 +22,8 @@ public class Database {
         return Forms.size();
     }
 
+    public static int clearDatabase(){
+        Forms.clear();
+        return Forms.size();
+    }
 }
