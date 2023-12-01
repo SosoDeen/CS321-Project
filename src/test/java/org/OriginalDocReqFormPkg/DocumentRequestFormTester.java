@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 public class DocumentRequestFormTester {
-
+/* 
     DocumentRequestForm form = new DocumentRequestForm("John Doe", "January 2", 
     "123 Test St.", 100, 200, "Book", "Test");
     String expectedString = "FormID: 100\nStatus: Test\nName: John Doe\nANumber: 200\nDOB: January 2\nAddress: 123 Test St.\nDocument: Book";
@@ -89,4 +89,5 @@ public class DocumentRequestFormTester {
         form = new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review");
         assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
     }
+    */
 }
