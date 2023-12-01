@@ -16,7 +16,6 @@ public class ProjectManager {
                 return currentTask.formID;
             }
         }
-
         // Means no more items for that module
         return -1;
     }
@@ -29,12 +28,21 @@ public class ProjectManager {
      * @return String success on succes and an error message on failure
      */
     public static String addTask(String moduleID, int formID){
-        
         try{
+            DocumentRequestForm form =DocumentRequestForm.getForm(formID);
+            if(form == null){
+                return "Form could not be found";
+            }
+
             taskList.add(new WorkFlowItem(formID, moduleID)); 
         }
+        catch(IndexOutOfBoundsException e){
+             return "Invaild index!";
+        }
         catch(Exception e){
-            System.out.println("HEELPP "+e.getMessage());
+            //System.out.println(e.getMessage());
+            return "Form unable to be found " +  e.getMessage()+ " occured";
+           //return "Form could not be found.";
         }    
         return "Successful";
     }
