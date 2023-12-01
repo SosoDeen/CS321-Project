@@ -3,7 +3,6 @@ package org.OriginalDocReqFormPkg;
 public class Approver {
     public static String MODULEID = "Approver";
     private DocumentRequestForm form;
-    private int nothing;
 
     public DocumentRequestForm getForm(){
         return form;

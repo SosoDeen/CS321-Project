@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 public class DatabaseTester {
    private DocumentRequestForm form;
-   private int nothing;
     
     @Test
     public void saveFormAndGetFormDataTest(){

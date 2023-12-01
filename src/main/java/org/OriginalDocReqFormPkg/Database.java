@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class Database {
     private static ArrayList<DocumentRequestForm> Forms = new ArrayList<DocumentRequestForm>();
-    private int nothing;
 
     public static DocumentRequestForm getFormData(int FormID){
         return Forms.get(FormID);
