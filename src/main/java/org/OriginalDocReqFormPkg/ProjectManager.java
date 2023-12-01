@@ -30,8 +30,8 @@ public class ProjectManager {
     public static String addTask(String moduleID, int formID){
         try{
             DocumentRequestForm form =DocumentRequestForm.getForm(formID);
-            if(form == null){
-                return "Form could not be found";
+            if(form.getDocName() == null){
+                return "Invaild index!";
             }
 
             taskList.add(new WorkFlowItem(formID, moduleID)); 
@@ -61,5 +61,8 @@ public class ProjectManager {
         }
 
         return taskCount;
+    }
+    public static void clearList(){
+        taskList.clear();
     }
 }
