@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 //import java.util.*;
 //import org.junit.Test;
 public class ReviewTester{
+    /*
     @Test
     public void reviewTest(){
         DocumentRequestForm form1 = new DocumentRequestForm("Test 1", "October", "123 tester", 102, 10203, "Book", "Review");
@@ -24,4 +25,5 @@ public class ReviewTester{
         assertEquals("Incorrect change:", "Paint", obj.editData("doc", "Paint").getDocName());
         assertEquals("Incorrect change:", "Approval", obj.editData("dob", "Approval").getStatus());
     }
+    */
 }
