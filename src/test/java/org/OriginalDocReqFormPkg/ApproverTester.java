@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 public class ApproverTester {
     private Approver obj = new Approver();
+    private int nothing;
     
     @Test
     public void acceptTest(){
