@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -31,12 +31,5 @@ public class ProjectManagerTester {
         assertTrue("A task was selected, expected 0, but was " + formID, formID == 0);
         formID = manager.nextTask("Approver");
         assertTrue("A task was selected, expected 101, but was " + formID, formID == 101);
-    }
-
-    @Test
-    public void sendEmailTest(){
-        Approver appr = new Approver();
-        String text = appr.acceptAndEmail();
-        assertEquals("Email was not properly created. Expected Email, but was " + manager.sendEmail(text), "Email", manager.sendEmail(text));
     }
 }

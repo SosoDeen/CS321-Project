@@ -1,8 +1,8 @@
-package OriginalDocReqFormPkg;
-import java.text.SimpleDateFormat;
+package org.OriginalDocReqFormPkg;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 public class DataEntry {
@@ -45,24 +45,32 @@ public class DataEntry {
      */
     private String validateData(String name, String dob, String address, String aNum, String docName){
         // name validation
-        if (name == null || name.equals("")) return "Please enter your name";
+        if (name == null || name.equals("")) return "Please enter a name";
 
         // dob validation (18-103 years)
-        if (dob.length() == 10){
+        if (dob == null || dob.equals("")) return "Please enter a date of birth";
+        else if (dob.length() == 10){
             try{
                 // parces date
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.ENGLISH);
                 LocalDate givenDate = LocalDate.parse(dob, formatter);
+                int givenYear = givenDate.getYear();
+                LocalDate d = LocalDate.now();
 
-                // validates date
-                if((givenDate.getDayOfMonth() > 31 &&  givenDate.getDayOfMonth() < 1) ||
-                (givenDate.getMonthValue() > 12 && givenDate.getMonthValue() < 1)||
-                (givenDate.getYear() > 2005 && givenDate.getYear() < 1920)){
+                // validates year
+                if(givenYear > d.getYear() || givenYear < 1920){
 
-                    return "Please provide a valid date";
+                    return "Please enter a valid year";
                 }
-            } catch (Exception e){
-                return "Please provide a valid date";
+            }
+            catch (DateTimeParseException e){
+                if (e.getMessage().contains("Invalid value for MonthOfYear (valid values 1 - 12):")){
+                    return "Please enter a valid month";
+                } 
+                else if(e.getMessage().contains("Invalid value for DayOfMonth (valid values 1 - 28/31):")){
+                    return "Please enter a valid day";
+                }
+                else return "Please format date following mm/dd/yyyy";
             }
             //else System.out.println("NICE!");
             //System.out.println(givenDate);
@@ -73,7 +81,8 @@ public class DataEntry {
         if (address == null || address.equals("")) return "Please enter a valid address";
 
         // a number validation
-        if (aNum.length() >= 7 && aNum.length() <= 9){
+        if (aNum == null || aNum.equals("")) return "Please enter an A-Number";
+        else if (aNum.length() >= 7 && aNum.length() <= 9){
             try {
                 int parsedInt = Integer.parseInt(aNum);
              }
@@ -88,6 +97,4 @@ public class DataEntry {
 
         return "success!";
     }
-
-
 }
