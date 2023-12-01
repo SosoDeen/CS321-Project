@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 //import java.util.*;
 
 public class ApproverTester {
-    Approver obj = new Approver();
+    private Approver obj = new Approver();
     
     @Test
     public void acceptTest(){
