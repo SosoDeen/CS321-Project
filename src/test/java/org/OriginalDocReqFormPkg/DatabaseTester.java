@@ -22,7 +22,7 @@ public class DatabaseTester {
     //@Test
     //public void noFormTest(){
     //    IndexOutOfBoundsException e = new IndexOutOfBoundsException();
-    //    assertEquals("Error, unsuccessful: Expected an out of bounds exception.", e, Database.getFormData(2));
+    //    assertEquals("Error, unsuccessful: Expected an out of bounds exception!", e, Database.getFormData(2));
     //}
 
     @Test
