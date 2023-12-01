@@ -5,33 +5,88 @@ import static org.junit.Assert.*;
 //import java.util.*;
 
 public class ProjectManagerTester {
-    /*
-    DocumentRequestForm form1 = new DocumentRequestForm("John Doe", "January 2", 
-    "123 Test St.", 100, 200, "Book", "Test");
-    DocumentRequestForm form2 = new DocumentRequestForm("John", "January 4", 
-    "123 Test St.", 101, 201, "Book", "Test");
-    DocumentRequestForm form3 = new DocumentRequestForm("Jane", "January 2", 
-    "123 Test St.", 102, 202, "Book", "Test");
-    ProjectManager manager = new ProjectManager();
+    
+    void inizializeDocument(){
+        //id 1
+        DocumentRequestForm.createForm("John Doe", "January 2", "123 Test St.", 200193, "Book", "Review"); 
+        //id 2
+        DocumentRequestForm.createForm("John", "January 4", "123 Wonder St.", 322142, "Unicorns", "Review"); 
+        //id 3
+        DocumentRequestForm.createForm("Starling", "October 4 2002", "115 Bakers St", 224231, "Art book", "Approver");
+        
+        //id 4
+        DocumentRequestForm.createForm("A Bee", "Febuary 13 2001", "123 Test St.", 340758, "Desk", "Approver"); 
+        //id 5
+        DocumentRequestForm.createForm("Cee Dee", "Jully 4 1969", "123 Wonder St.", 325144, "Paper", "Email"); 
+        //id 6
+        DocumentRequestForm.createForm("E F", "October 4 2002", "115 Bakers St", 875321, "Work Contract", "Review");
+    }
+    
     @Test
     public void testAdd(){
-       // ProjectManager manager = new ProjectManager();
-        String message = manager.addTask("Review", 100);
-        assertFalse("Unable to add task 1, " + message + " occured", message.equals("error Message"));
-        message = manager.addTask("Approver", 101);
-        assertFalse("Unable to add task 2" + message +" occuered", message.equals("error Message"));
-        message = manager.addTask("Review", 1);
-        assertTrue("Able to add task 3, " + message + " occured", message.equals("error Message"));
-
+       // ProjectProjectManager ProjectManager = new ProjectProjectManager();
+       this.inizializeDocument();
+       String message = ProjectManager.addTask("Review", 1);
+        assertEquals("Unable to add task 1, " + message + " occured", "Successful", message);
+        message = ProjectManager.addTask("Review", 2);
+        assertEquals("Unable to add task 2" + message +" occuered", "Successful", message);
+        message = ProjectManager.addTask("Approver", 3);
+        assertEquals("Unable to add task 3" + message +" occuered", "Successful", message);
+        assertEquals("Unable to add task 1, " + message + " occured", "Successful", message);
+        
+        
+        message = ProjectManager.addTask("Review", -1);
+        assertEquals("Able to add task 3, expected 'Invailid index!', but was " + message, "Invaild index!", message);
+        message = ProjectManager.addTask("Review", 11);
+        assertEquals("Able to add task 3, expected 'Invailid index!', but was " + message, "Invaild index!", message);
+    }
+    @Test 
+    public void testSize(){
+        if (ProjectManager.getTasklistSize() == 0){
+            testAdd();
+        }
+        assertTrue("Size is incorrect expected 3, but was " + ProjectManager.getTasklistSize(), ProjectManager.getTasklistSize() == 3);
+        assertTrue("Size for Review tasks is incorrect expected 2, but was " + ProjectManager.getModuleTaskListSize("Review"), ProjectManager.getModuleTaskListSize("Review") == 2);
+        assertTrue("Size for Email tasks is incorrect expected 0, but was " + ProjectManager.getModuleTaskListSize("Email"), ProjectManager.getModuleTaskListSize("Email") == 0);
+        assertTrue("Size for Approver tasks is incorrect expected 1, but was " + ProjectManager.getModuleTaskListSize("Approver"), ProjectManager.getModuleTaskListSize("Approver") == 1);
     }
     @Test
-    public void testNext(){
-        int formID = manager.nextTask("Review");
-        assertTrue("Wrong task was selected, expected 100, but was " + formID, formID==100);
-        formID = manager.nextTask("Review");
-        assertTrue("A task was selected, expected 0, but was " + formID, formID == 0);
-        formID = manager.nextTask("Approver");
-        assertTrue("A task was selected, expected 101, but was " + formID, formID == 101);
+    public void testWorkFlow(){
+        if (ProjectManager.getTasklistSize() == 0){
+            testAdd();
+        }
+        String message;
+       
+        //Next tests 
+        int formID = ProjectManager.nextTask("Review");
+        assertTrue("Wrong task was selected, expected 1, but was " + formID, formID == 1);
+        assertTrue("Size is incorrect expected 2, but was " + ProjectManager.getTasklistSize(), ProjectManager.getTasklistSize() == 2);
+        assertTrue("Size for Review tasks is incorrect expected 1, but was " + ProjectManager.getModuleTaskListSize("Review"), ProjectManager.getModuleTaskListSize("Review") == 1);
+
+        formID = ProjectManager.nextTask("Approver");
+        assertTrue("A task was selected, expected 3, but was " + formID, formID == 3);
+        formID = ProjectManager.nextTask("Approver");
+        assertTrue("A task was selected, expected -1, but was " + formID, formID == -1);
+        formID = ProjectManager.nextTask("Review");
+        assertTrue("A task was selected, expected 2, but was " + formID, formID == 2);
+        formID = ProjectManager.nextTask("Review");
+        assertTrue("A task was selected, expected -1, but was " + formID, formID == -1);
+        assertTrue("Size for Review tasks is incorrect expected 0, but was " + ProjectManager.getModuleTaskListSize("Review"), ProjectManager.getModuleTaskListSize("Review") == 0);
+        assertTrue("Size for tasks is incorrect expected 0, but was " + ProjectManager.getTasklistSize(), ProjectManager.getTasklistSize() == 0);
+        
+
+        message = ProjectManager.addTask("Approver", 4);
+        assertEquals("Unable to add task 4" + message +" occuered", "Successful", message);
+        message = ProjectManager.addTask("Email", 5);
+        assertEquals("Unable to add task 5" + message +" occuered", "Successful", message);
+
+
+        message = ProjectManager.addTask("Review", 6);
+        assertEquals("Unable to add task 6" + message +" occuered", "Successful", message);
+        assertTrue("Size for Review tasks is incorrect expected 1, but was " + ProjectManager.getModuleTaskListSize("Review"), ProjectManager.getModuleTaskListSize("Review") == 1);
+        formID = ProjectManager.nextTask("Review");
+        assertTrue("A task was selected, expected 6, but was " + formID, formID == 6);
+
+        
     }
-    */
 }
