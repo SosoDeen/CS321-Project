@@ -17,36 +17,14 @@ public class Approver {
     }
 
     
-    public String acceptAndEmail(String moduleID){
-        if (moduleID.equals("Email")){
-            ProjectManager.addTask(moduleID, form.getFormID());
-            return "Email";
-        }
-        else{
-            return "Invalid moduleID";
-        }
+    public void acceptAndEmail(String moduleID){
+        ProjectManager.addTask(moduleID, form.getFormID());
     }
 
     //return documentrequestform to workflow with status set to review
-    public String rejectAndReturn(String moduleID){
-        if(moduleID.equals(Review.MODULEID)){
-            int before = ProjectManager.getModuleTaskListSize(Review.MODULEID);
-
-            ProjectManager.addTask(moduleID, form.getFormID());
-            form.setStatus("Review");
-
-            int after = ProjectManager.getModuleTaskListSize(Review.MODULEID);
-
-            if(before + 1 == after){
-                return "Successfully Rejected";
-            }
-            else{
-                return "Task was not added to Review task list";
-            }
-        }
-        else{
-            return "Invalid moduleID";
-        }
+    public void rejectAndReturn(String moduleID){
+        ProjectManager.addTask(moduleID, form.getFormID());
+        form.setStatus("Review");
     }
 
     public String nextForm(){
