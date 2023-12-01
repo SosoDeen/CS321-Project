@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 
 public class DatabaseTester {
     

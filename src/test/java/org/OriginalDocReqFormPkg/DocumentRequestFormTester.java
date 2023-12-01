@@ -1,4 +1,4 @@
-package OriginalDocReqFormPkg;
+package org.OriginalDocReqFormPkg;
 
 import java.io.*;
 import org.junit.*;
@@ -57,8 +57,7 @@ public class DocumentRequestFormTester {
     }
     @Test
     public void createFormTest(){
-        DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 
-        262, 543, "Diploma", "Entry");
+        DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 262, 543, "Diploma", "Entry");
         assertEquals("Incorrect Form", form2, DocumentRequestForm.getForm(262));
         assertTrue("Form was not null", DocumentRequestForm.getForm(3) == null);
         //TODO Add how you will test the data entry
@@ -77,7 +76,6 @@ public class DocumentRequestFormTester {
         assertTrue("Error was successful", obj.add(null) != "Success");
         result = obj.add(new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review"));
         assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-
     }
 
     @Test
