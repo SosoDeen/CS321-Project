@@ -25,6 +25,7 @@ public class ProjectManagerTester {
     @Test
     public void testAdd(){
        // ProjectProjectManager ProjectManager = new ProjectProjectManager();
+       Database.clearDatabase();
        this.inizializeDocument();
        String message = ProjectManager.addTask("Review", 1);
         assertEquals("Unable to add task 1, " + message + " occured", "Successful", message);
@@ -32,6 +33,7 @@ public class ProjectManagerTester {
         assertEquals("Unable to add task 2" + message +" occuered", "Successful", message);
         message = ProjectManager.addTask("Approver", 3);
         assertEquals("Unable to add task 3" + message +" occuered", "Successful", message);
+        
         assertEquals("Unable to add task 1, " + message + " occured", "Successful", message);
         
         
@@ -42,9 +44,8 @@ public class ProjectManagerTester {
     }
     @Test 
     public void testSize(){
-        if (ProjectManager.getTasklistSize() == 0){
-            testAdd();
-        }
+        ProjectManager.clearList();
+        testAdd();
         assertTrue("Size is incorrect expected 3, but was " + ProjectManager.getTasklistSize(), ProjectManager.getTasklistSize() == 3);
         assertTrue("Size for Review tasks is incorrect expected 2, but was " + ProjectManager.getModuleTaskListSize("Review"), ProjectManager.getModuleTaskListSize("Review") == 2);
         assertTrue("Size for Email tasks is incorrect expected 0, but was " + ProjectManager.getModuleTaskListSize("Email"), ProjectManager.getModuleTaskListSize("Email") == 0);
@@ -52,11 +53,13 @@ public class ProjectManagerTester {
     }
     @Test
     public void testWorkFlow(){
-        if (ProjectManager.getTasklistSize() == 0){
-            testAdd();
+        if(ProjectManager.getTasklistSize() > 0){
+            ProjectManager.clearList();
+            assertTrue("Unable to clear tasklist", ProjectManager.getTasklistSize() == 0);
+
         }
+        testAdd();
         String message;
-       
         //Next tests 
         int formID = ProjectManager.nextTask("Review");
         assertTrue("Wrong task was selected, expected 1, but was " + formID, formID == 1);
