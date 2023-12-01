@@ -10,7 +10,7 @@ public class Database {
 
     public static String saveFormData(DocumentRequestForm form){
         Forms.add(form.getFormID() - 1, form);
-        return "Sucess";
+        return "Success";
 
     }
 
@@ -22,4 +22,8 @@ public class Database {
         return Forms.size();
     }
 
+    public static int clearDatabase(){
+        Forms.clear();
+        return Forms.size();
+    }
 }
