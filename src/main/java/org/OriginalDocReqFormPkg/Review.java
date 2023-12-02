@@ -1,5 +1,10 @@
 package org.OriginalDocReqFormPkg;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+
 public class Review{
     public static String MODULEID = "Review";
     private DocumentRequestForm form;
@@ -40,17 +45,60 @@ public class Review{
      * @param form
      * @return
      */
-    protected DocumentRequestForm editData(String name, String dob, String address, String aNum, String docName){  
+    protected String editData(String name, String dob, String address, String aNum, String docName){  
+        if(name == null || name.equals("")){
+            return "Invalid Name";
+        }
+        if(dob != null && dob.length() == 10){
+            try{
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.ENGLISH);
+                LocalDate givenDate = LocalDate.parse(dob, formatter);
+                int givenYear = givenDate.getYear();
+                LocalDate d = LocalDate.now();
+                if(givenYear > d.getYear() || givenYear < 1920){
+
+                    return "Invalid Year";
+                }
+            }
+            catch (DateTimeParseException e){
+                if (e.getMessage().contains("Invalid value for MonthOfYear (valid values 1 - 12):")){
+                    return "Invalid Month";
+                } 
+                else if(e.getMessage().contains("Invalid value for DayOfMonth (valid values 1 - 28/31):")){
+                    return "Invalid Day";
+                }
+                return "Invalid Date of Birth, enter in the mm/dd/yyyy format";
+            }
+        //el
+        }
+        else{
+            return "Invalid Date of Birth, enter in the mm/dd/yyyy format";
+        }
+
+        if(address == null || address.equals("")){
+            return "Invalid Address";
+        }
+        if(docName == null || docName.equals("")){
+            return "Invalid Document Name";
+        }
+        int num = 0;
+        if(aNum.length() < 7 || aNum.length() > 9){
+            return "Invalid A-Number";
+        }
+        else{
+            try{
+                num = Integer.parseInt(aNum);
+            }
+            catch (Exception e) {
+                System.out.println("Invalid A-Number");
+            }
+        }
         form.setName(name);
         form.setDob(dob);
         form.setAddress(address);
         form.setDocName(docName);
-        try {
-            form.setANum(Integer.parseInt(aNum));
-        } catch (Exception e) {
-            System.out.println("BAD A-NUM");
-        }
-        return form;
+        form.setANum(num);
+        return "Updated!";
     }
     //  /**
     //  * This method changes the desired type to be the new updated data
