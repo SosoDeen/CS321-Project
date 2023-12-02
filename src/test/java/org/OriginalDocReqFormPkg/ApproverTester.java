@@ -5,25 +5,74 @@ import static org.junit.Assert.*;
 //import java.util.*;
 
 public class ApproverTester {
+    private Approver approver = new Approver();
+
     @Test
-    public void testDataTest(){
-        DocumentRequestForm form1 = new DocumentRequestForm("John Doe", "May 5", 
-        "123 First St.", 102, 0, "Book", "Approve");
-        Approver obj = new Approver();
-        
-        assertEquals(true, obj.dataTest());
-        assertEquals(false, obj.dataTest());
-    }
-    
     public void acceptTest(){
-        Approver obj = new Approver();
         
-        assertEquals(null, obj.acceptAndEmail());
+        approver.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
+
+        String result = approver.acceptAndEmail("Email");
+        String expected = "Email";
+
+        assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
     }
 
+    @Test
+    public void wrongEmailModuleTest(){
+        approver.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
+
+        String result = approver.acceptAndEmail(Review.MODULEID);
+        String expected = "Invalid moduleID";
+
+        assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
+    }
+
+    @Test
     public void rejectTest(){
-        Approver obj = new Approver();
-       
-        assertEquals(null, obj.rejectAndReturn());
+        
+        approver.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
+
+        String result = approver.rejectAndReturn(Review.MODULEID);
+        String expected = "Successfully Rejected";
+
+        assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
+    }
+
+    @Test
+    public void invalidModuleTest(){
+        
+        approver.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
+
+        String result = approver.rejectAndReturn(Approver.MODULEID);
+        String expected = "Invalid moduleID";
+
+        assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
+    }
+
+    @Test
+    public void noFormsLeftTest(){
+        String result = approver.nextForm();
+        String expected = "There are currently no request to approve.";
+
+        assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
+    }
+
+
+    @Test
+    public void nextFormTest(){
+        approver.setForm(DocumentRequestForm.createForm("John Doe", "01/01/2001/", "12345", 
+    20202020, "Document", "Approver"));
+
+        ProjectManager.addTask(Approver.MODULEID, approver.getForm().getFormID());
+
+        String result = approver.nextForm();
+        String expected = "Loading next form.";
+
+        assertEquals("Error, unsuccessful: Expected " + expected + " but got " + result + " instead.", expected, result);
     }
 }

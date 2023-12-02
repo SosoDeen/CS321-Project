@@ -9,9 +9,13 @@ public class Database {
     }
 
     public static String saveFormData(DocumentRequestForm form){
-        Forms.add(form.getFormID() - 1, form);
-        return "Sucess";
-
+        try{
+            Forms.add(form.getFormID() - 1, form);
+            return "Success";
+        }
+        catch(Exception e){
+            return "Unsuccessful";
+        }
     }
 
     public static int getNewFormID(){
@@ -22,4 +26,8 @@ public class Database {
         return Forms.size();
     }
 
+    public static int clearDatabase(){
+        Forms.clear();
+        return Forms.size();
+    }
 }
