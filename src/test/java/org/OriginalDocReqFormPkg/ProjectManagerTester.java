@@ -3,7 +3,10 @@ package org.OriginalDocReqFormPkg;
 import org.junit.*;
 import static org.junit.Assert.*;
 //import java.util.*;
-
+/**
+ * This class tests the ProjectManager class to make sure that all methods return 
+ * as expected
+ */
 public class ProjectManagerTester {
     
     void inizializeDocument(){
