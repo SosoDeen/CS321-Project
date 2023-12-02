@@ -207,9 +207,9 @@ public class StarScreen extends JFrame implements ActionListener{
 
         }
         else if (sourceEvent == editButton){
-            currentReview.editData(nameField.getText(), dobField.getText(), addressField.getText(), aNumField.getText(), docNameField.getText());
+            String message = currentReview.editData(nameField.getText(), dobField.getText(), addressField.getText(), aNumField.getText(), docNameField.getText());
             popupMessage.setVisible(true);
-            popupMessage.setText("Updated!");
+            popupMessage.setText(message);
         }
         else if(sourceEvent == reviewAppButton){
             currentReview.addToFlow(Approver.MODULEID);
