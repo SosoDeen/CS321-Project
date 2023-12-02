@@ -1,93 +1,208 @@
 package org.OriginalDocReqFormPkg;
 
-import java.io.*;
 import org.junit.*;
 import static org.junit.Assert.*;
-import java.util.*;
 
 public class DocumentRequestFormTester {
-    /*
-    DocumentRequestForm form = new DocumentRequestForm("John Doe", "January 2", 
-    "123 Test St.", 100, 200, "Book", "Test");
-    String expectedString = "FormID: 100\nStatus: Test\nName: John Doe\nANumber: 200\nDOB: January 2\nAddress: 123 Test St.\nDocument: Book";
+
     @Test
-    public void getSetNameTest(){
-        assertEquals("Incorrect Item/Value, expected John Doe, but was " + form.getName(), "John Doe", form.getName());
-        form.setName("Jane Doe");
-        assertEquals("Incorrect Item/Value, expected Jane Doe, but was " + form.getName(), "Jane Doe", form.getName());
-        form.setName(null);
-        assertTrue("Expected form to not be null", form.getName() != null);
+    public void createFormAndSaveToDBTest(){
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form2 = DocumentRequestForm.createForm("Tester 1", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // checks if form is null
+        assertNotNull("Error: form should not be null", form2);
+        // checks if from was added to the database successfully
+        assertEquals("Error: Form failed to save to database", 1, Database.getdatabaseSize());
     }
+    
+    @Test
+    public void setNameTest(){
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // tests with a valid name
+        String expected = "Tester 2.1";
+        form.setName(expected);
+        assertEquals("Incorrect Name: expected Tester 2.1, but was " + form.getName(), expected, form.getName());
+
+        // tests with null name
+        expected = "Tester 2.2";
+        form.setName(expected);
+        form.setName(null);
+        assertEquals("Incorrect Name: expected Tester 2.2, but was " + form.getName(), expected, form.getName());
+
+        // tests with empty name
+        expected = "Tester 2.3";
+        form.setName(expected);
+        form.setName("");
+        assertEquals("Incorrect Name: expected Tester 2.2, but was " + form.getName(), expected, form.getName());
+    }
+    
     @Test
     public void getSetDobTest(){
-        assertEquals("Incorrect Item/Value expected January 2, but was " + form.getDob(), "January 2", form.getDob());
-        form.setDob("March 14");
-        assertEquals("Incorrect Item/Value expected March 14, but was " + form.getDob(), "March 14", form.getDob());
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // tests with a valid dob
+        String expected = "10/12/2003";
+        form.setDob(expected);
+        assertEquals("Incorrect dob: expected "+expected+", but was " + form.getDob(), expected, form.getDob());
+
+        // tests with null dob
+        expected = "10/15/2002";
+        form.setDob(expected);
+        form.setDob(null);
+        assertEquals("Incorrect dob: expected "+expected+", but was " + form.getDob(), expected, form.getDob());
+
+        // tests with empty dob
+        expected = "10/20/2001";
+        form.setDob(expected);
+        form.setDob("");
+        assertEquals("Incorrect dob: expected "+expected+", but was " + form.getDob(), expected, form.getDob());
     }
+    
     @Test
     public void getSetAddressTest(){
-        assertEquals("Incorrect Item/Value expected 123 Test St., but was " + form.getAddress(), "123 Test St.", form.getAddress());
-        form.setAddress("52355 Oak St.");
-        assertEquals("Incorrect Item/Value expected 52355 Oak St., but was " + form.getAddress(), "52355 Oak St.", form.getAddress());
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // tests with valid variable
+        String expected = "123 Cool St";
+        form.setAddress(expected);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getAddress(), expected, form.getAddress());
+
+        // tests with null variable
+        expected = "123 Math St";
+        form.setAddress(expected);
+        form.setAddress(null);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getAddress(), expected, form.getAddress());
+
+        // tests with empty variable
+        expected = "123 Games St";
+        form.setAddress(expected);
+        form.setAddress("");
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getAddress(), expected, form.getAddress());
     }
-     @Test
-     public void geANumTest(){
-         assertEquals("Incorrect Item/Value expected 200, but was " + form.getANum(), 200, form.getANum());
-     }
-     @Test
-     public void getSetFormIDTest(){
-         assertEquals("Incorrect Item/Value expected 100, but was " + form.getFormID(), 100, form.getFormID());
-     }
+    
     @Test
-    public void getSetDocNameTest(){
-        assertEquals("Incorrect Item/Value expected Book, but was " + form.getDocName(), "Book", form.getDocName());
-        form.setDocName("Pamphlet");
-        assertEquals("Incorrect Item/Value expected Pamphlet, but was " + form.getDocName(), "Pamphlet", form.getDocName());
-    }
-    @Test
-    public void getSetStatusTest(){
-        assertEquals("Incorrect Item/Value expected Test, but was " + form.getStatus(), "Test", form.getStatus());
-        form.setStatus("Review");
-        assertEquals("Incorrect Item/Value expected Review, but was " + form.getStatus(), "Review", form.getStatus());
+    public void geANumTest(){
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // tests with valid variable
+        int expected = 1231234;
+        form.setANum(expected);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getANum(), expected, form.getANum());
+
+        // tests with too small variable
+        expected = 1593570;
+        form.setANum(expected);
+        form.setANum(0);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getANum(), expected, form.getANum());
+
+        // tests with too big variable
+        expected = 1673820;
+        form.setANum(expected);
+        form.setANum(1234567890);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getANum(), expected, form.getANum());
     }
 
     @Test
-    public void toStringTest(){
-        assertEquals("Incorrect string expected:\n" + expectedString+ "\nBut was:\n"+ form.toString(), expectedString, form.toString());
+    public void getSetDocNameTest(){
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // tests with valid variable
+        String expected = "Book";
+        form.setDocName(expected);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getDocName(), expected, form.getDocName());
+
+        // tests with null variable
+        expected = "Pamphlet";
+        form.setDocName(expected);
+        form.setDocName(null);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getDocName(), expected, form.getDocName());
+
+        // tests with empty variable
+        expected = "Record";
+        form.setDocName(expected);
+        form.setDocName("");
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getDocName(), expected, form.getDocName());
     }
+
     @Test
-    public void createFormTest(){
-        DocumentRequestForm form2 = DocumentRequestForm.createForm("Jim", "February 5", "22222 Fifth St.", 262, 543, "Diploma", "Entry");
-        assertEquals("Incorrect Form", form2, DocumentRequestForm.getForm(262));
-        assertTrue("Form was not null", DocumentRequestForm.getForm(3) == null);
-        //TODO Add how you will test the data entry
+    public void getSetStatusTest(){
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+        
+        // tests with valid variable
+        String expected = "Reviewer";
+        form.setStatus(expected);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getStatus(), expected, form.getStatus());
+
+        // tests with null variable
+        expected = "Approver";
+        form.setStatus(expected);
+        form.setStatus(null);
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getStatus(), expected, form.getStatus());
+
+        // tests with empty variable
+        expected = "Email";
+        form.setStatus(expected);
+        form.setStatus("");
+        assertEquals("Incorrect variable: expected "+expected+", but was " + form.getStatus(), expected, form.getStatus());
     }
 
     @Test
     public void getFormTest(){
-        assertEquals("Incorrect Form", form.getFormID(), DocumentRequestForm.getForm(form.getFormID()).getFormID());
-        assertTrue("Form was not null", DocumentRequestForm.getForm(123) == null);
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+
+        // gets a form from database
+        DocumentRequestForm formNew = DocumentRequestForm.getForm(1);
+
+        // checks if not null
+        assertNotNull("Error: form should not be null", formNew);
+
+        // compares with main form with new form
+        assertEquals("Incorrect Name: expected "+form.getName()+", but was " + formNew.getName(), form.getName(), formNew.getName());
+        assertEquals("Incorrect Name: expected "+form.getDob()+", but was " + formNew.getDob(), form.getDob(), formNew.getDob());
+        assertEquals("Incorrect Name: expected "+form.getAddress()+", but was " + formNew.getAddress(), form.getAddress(), formNew.getAddress());
+        assertEquals("Incorrect Name: expected "+form.getANum()+", but was " + formNew.getANum(), form.getANum(), formNew.getANum());
+        assertEquals("Incorrect Name: expected "+form.getDocName()+", but was " + formNew.getDocName(), form.getDocName(), formNew.getDocName());
+        assertEquals("Incorrect Name: expected "+form.getFormID()+", but was " + formNew.getFormID(), form.getFormID(), formNew.getFormID());
+        assertEquals("Incorrect Name: expected "+form.getStatus()+", but was " + formNew.getStatus(), form.getStatus(), formNew.getStatus());
     }
+    
     @Test
-    public void saveToDatabase(){
-        Database obj = new Database();
-        String result = obj.add(this);
-        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-        assertTrue("Error was successful", obj.add(null) != "Success");
-        result = obj.add(new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review"));
-        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
+    public void toStringTest(){
+        // Clears database and project manager
+        ProjectManager.clearList();
+        Database.clearDatabase();
+        DocumentRequestForm form = DocumentRequestForm.createForm("Tester 2", "10/10/2008", "123 tester st.", 1231234, "Book", "Created");
+
+        String expected = "FormID: " + form.getFormID() + "\nStatus: " + form.getStatus() + "\nName: " + form.getName()
+        + "\nANumber: " + form.getANum() + "\nDOB: " + form.getDob() + "\nAddress: " + form.getAddress()
+        + "\nDocument: " + form.getDocName();
+
+        assertEquals("Incorrect string expected:\n" +expected+ "\nBut was:\n"+ form.toString(), expected, form.toString());
     }
 
-    @Test
-    public void shipDocumentTest(){
-        //Database obj = new Database();
-        String result = form.shipDocument();
-        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-        form = new DocumentRequestForm("John Doe", "January 2", "wrong address", 100, 200, "Book", "Test");
-        result = form.shipDocument();
-        assertTrue("Error was successful", result != "Success");
-        form = new DocumentRequestForm("test 12", "12/6/01", "10000 results", 4, 120, "Book", "Review");
-        assertEquals("Error unsucessful. Expected 'Success', but got" + result + "instead", "Success", result);
-    }
-    */
 }
