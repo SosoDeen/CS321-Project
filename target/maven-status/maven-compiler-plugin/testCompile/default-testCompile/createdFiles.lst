@@ -1,0 +1,6 @@
+org\OriginalDocReqFormPkg\DocumentRequestFormTester.class
+org\OriginalDocReqFormPkg\ProjectManagerTester.class
+org\OriginalDocReqFormPkg\ApproverTester.class
+org\OriginalDocReqFormPkg\DatabaseTester.class
+org\OriginalDocReqFormPkg\DataEntryTester.class
+org\OriginalDocReqFormPkg\ReviewTester.class
