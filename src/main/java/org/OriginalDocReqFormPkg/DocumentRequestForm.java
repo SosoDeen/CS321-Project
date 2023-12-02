@@ -18,6 +18,7 @@ public class DocumentRequestForm {
         this.docName = docName;
         this.status = status;
     }
+
     public String getName(){
         return this.name;
     }
@@ -41,23 +42,27 @@ public class DocumentRequestForm {
     }
 
     public void setName(String name){
+        if (name == null || name == "") return;
         this.name = name;
     }
     public void setDob(String dob){
+        if (dob == null || dob == "") return;
         this.dob = dob;
     }
-    public void setAddress(String Address){
-        this.address = Address;
+    public void setAddress(String address){
+        if (address == null || address == "") return;
+        this.address = address;
     }
     public void setANum(int aNum){
+        if (aNum < 1000000 || aNum > 999999999) return;
         this.aNum = aNum;
     }
-    // public void setFormID(int formID){
-    // }
     public void setDocName(String docName){
+        if (docName == null || docName == "") return;
         this.docName = docName;
     }
     public void setStatus(String status){
+        if (status == null || status == "") return;
         this.status = status;
     }
 
@@ -70,15 +75,11 @@ public class DocumentRequestForm {
         Database.saveFormData(form);
         return form;
     }
+
     public static DocumentRequestForm getForm(int formID){
-        return Database.getFormData(formID-1); 
+        return Database.getFormData(formID-1);
     }
-    // /**
-    //  * Validates that the database entries are complete.
-    //  */
-    // public static String validate(DocumentRequestForm form){
-    //     return null;
-    // }
+    
     /**
      * Save the current form to the database 
      * @return
@@ -86,13 +87,7 @@ public class DocumentRequestForm {
     public String saveToDatabase(){
         return Database.saveFormData(this);
     }
-    /**
-     * Will try to find the address and document in the database and then send a signal to
-     * ship the document to the address.
-     */
-    public String shipDocument(){
-        return null;
-    }
+
     /**
      * A string representation of the form
      * @return String the string containing the form information.

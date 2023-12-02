@@ -56,6 +56,7 @@ public class ApproverTester {
 
     @Test
     public void noFormsLeftTest(){
+        ProjectManager.clearList();
         String result = approver.nextForm();
         String expected = "There are currently no request to approve.";
 
