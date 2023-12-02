@@ -25,6 +25,20 @@
   
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+        <configuration>
+            <includes>
+                <include>**/*Tester.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/BaseTest.java</exclude>
+                <exclude>**/TestsUtil.java</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
     </plugins>
   </build>
   
